@@ -1,13 +1,31 @@
-import Image from 'next/image'
+'use client'
+
 import styles from './styles.module.css'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useState } from 'react'
 
 const Header = () =>
 {
+    const [ showDropdown, setShowDropdown ] = useState(false);
+    const router = useRouter();
+    const { data } = useSession();
 
     return(
         <div className={styles.container}>
-            <p>Mock Hub</p>
-            <p>Abhishek</p>
+            <p className={styles.title}><span className={styles.mock}>Mock</span> Hub</p>
+            {data?.user ? 
+            <p className={styles.user} onClick={()=> setShowDropdown(!showDropdown)}>{showDropdown ? 'X' : data.user.name.charAt(0)}</p> :
+            <div className={styles.navigation}>
+                <button className={styles.route} onClick={()=> router.push('/login')}>Login</button>
+                <button className={styles.route} onClick={()=> router.push('/signup')}>Sign up</button>
+            </div>}
+           {showDropdown && 
+           <div className={styles.dropdown}>
+                <p>{data.user.name}</p>
+                <p>{data.user.email}</p>
+                <button className={styles.logout} onClick={()=> router.push('/logout')}>Logout</button>
+            </div>}
         </div>
     )
 }

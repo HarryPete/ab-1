@@ -3,20 +3,18 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 import { CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import styles from './styles.module.css'
-import axios from "axios";
 import { useState } from "react";
 
-const MODEL_NAME = "gemini-1.0-pro";
-
-export default function Card() 
+const MockForm = () =>
 {
-  const [data, setData] = useState("");
-  const [ isLoading, setIsLoading ] = useState(false);
 
-  async function runChat(prompt) 
-  {
-    const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_KEY);
-    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    const [ response, setResponse ] = useState("");
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    async function runChat(prompt) 
+    {
+        const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
 
     const generationConfig = {
       temperature: 0.9,
@@ -59,11 +57,10 @@ export default function Card()
       ],
     })
 
-    
     setIsLoading(true)
     const result = await chat.sendMessage(prompt);
     const response = result.response;
-    setData((response.text()).replace('```json','').replace('```','').split('```')[0]);
+    setResponse((response.text()).replace('```json','').replace('```','').split('```')[0]);
     setIsLoading(false)
   }
 
@@ -89,20 +86,12 @@ export default function Card()
         }
     }
 
-    console.log(data);
-
     return(
-        <div className={styles.container}>
-            {/* <div className={styles.content}>
-                <p className={styles.about}><span className={styles.title}>Mock Hub </span>
-                simulates real exams, helping you prepare effectively with personalized mock tests and detailed feedback</p>
-            </div> */}
-            
-            <form onSubmit={handleSubmit} className={styles.form}>
-                <TextField name='role' label='Job Role' placeholder='Ex.Frontend developer'/>
-                <TextField name='description' label='Job Description' placeholder='Ex.HTML, CSS, Javascript, React'/>
-                <TextField name='experience' label='Experience' placeholder='Ex.2'/>
-                <FormControl fullWidth>
+        <form onSubmit={handleSubmit} className={styles.form}>
+            <TextField name='role' label='Job Role' placeholder='Ex.Frontend developer'/>
+            <TextField name='description' label='Job Description' placeholder='Ex.HTML, CSS, Javascript, React'/>
+            <TextField name='experience' label='Experience' placeholder='Ex.2'/>
+            <FormControl fullWidth>
                 <InputLabel>Type of questions</InputLabel>
                 <Select name="type" label='Type of questions'>
                     <MenuItem value='Technical'>Technical</MenuItem>
@@ -112,14 +101,14 @@ export default function Card()
                     <MenuItem value='Leadership'>Leadership</MenuItem>
                     <MenuItem value='Career goals'>Salary expectation</MenuItem>
                 </Select>
-                </FormControl>
-                <TextField name='questions' label='Numer of questions' placeholder='Ex.5'/>
-                <div className={styles.controls}>
-                    <button className={styles.cancel}>Clear</button>
-                    <button className={styles.submit} type="submit">Submit</button>
-                </div>
-            </form>
-            {isLoading && <CircularProgress sx={{color: 'blue'}}/>}
-        </div>
+            </FormControl>
+            <TextField name='questions' label='Numer of questions' placeholder='Ex.5'/>
+            <div className={styles.controls}>
+                <button className={styles.cancel}>Clear</button>
+                <button className={styles.submit} type="submit">Submit</button>
+            </div>
+        </form>
     )
 }
+
+export default MockForm

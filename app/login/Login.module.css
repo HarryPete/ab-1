@@ -1,0 +1,161 @@
+.wrapper
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+.container
+{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.header
+{
+    margin-bottom: 20px;
+}
+
+.logo
+{
+    text-align: center;
+    font-size: 36px;
+    font-weight: 750;
+    color: rgb(0, 177, 94);
+}
+
+.welcome
+{
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+}
+
+.inputs
+{
+    width: 100%;
+}
+
+.form
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+}
+
+.submit
+{
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 5px;
+    background-color: rgb(0, 177, 94);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.submit:hover
+{
+    background-color: rgb(5, 160, 88);
+}
+
+.submit:hover, .google:hover
+{
+    cursor: pointer;
+}
+
+.forgotpassword
+{
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.errorMessage
+{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--alert-color);
+    margin: 0;
+}
+
+.noaccount
+{
+    margin: 0;
+    margin-top: 20px ;
+}
+
+.link
+{
+    color: grey;
+    font-weight: 500;
+}
+
+.link:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.option
+{
+    margin: 0;
+    color: grey;
+    font-weight: 500;
+}
+
+.error
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 10px;
+    color: var(--alert-color);
+}
+
+.erroricon
+{
+    height: 20px;
+    width: fit-content;
+}
+
+.errorMessage
+{
+    font-size: 14px;
+    margin: 0;
+}
+
+.success
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 10px;
+    font-size: 14px;
+    color: var(--success-color);
+}
+
+.successicon
+{
+    height: 20px;
+    width: fit-content;
+}
+
+.successMessage
+{
+    margin: 0;
+}

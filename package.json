@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^0.0.46",
+    "@auth/mongodb-adapter": "^3.4.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@google/generative-ai": "^0.17.1",
@@ -19,10 +20,13 @@
     "@neondatabase/serverless": "^0.9.5",
     "ai": "^3.3.26",
     "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
     "drizzle-orm": "^0.33.0",
     "next": "14.2.7",
+    "next-auth": "^5.0.0-beta.20",
     "react": "^18.3.1",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-webcam": "^7.2.0"
   },
   "devDependencies": {
     "drizzle-kit": "^0.24.2",
