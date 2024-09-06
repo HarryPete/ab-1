@@ -6,7 +6,7 @@ const Footer = () =>
 {
     return(
         <div className={styles.container}>
-            <p className={styles.title}><span className={styles.mock}>Mock</span> Hub</p>
+            {/* <p className={styles.title}><span className={styles.mock}>Mock</span> Hub</p> */}
             <div className={styles.emailWrapper}>
                 <Image className={styles.emailIcon} src={email} alt='email'/>
                 <p className={styles.email}>abhishekmagadum7@gmail.com</p>
