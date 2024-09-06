@@ -1,0 +1,68 @@
+.container
+{
+    width: calc(25% - 10px);
+    border: 1px solid rgb(216, 216, 216);
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.mock
+{
+    margin: 0;
+}
+
+.footer
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0 0;
+}
+
+.date
+{
+    color: grey;
+    font-size: 12px;
+}
+
+.review
+{
+    background-color: var(--primary-color);
+    padding: 8px;
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.review:hover
+{
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.nav
+{
+    display: flex;
+    column-gap: 5px;
+}
+
+.mockWrapper
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(235, 235, 235);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.mockIcon
+{
+    height: 100px;
+    width: fit-content;
+}
+

@@ -7,3 +7,23 @@
   --primary-color: rgb(0, 54, 116);
   --secondary-color: rgb(0, 177, 94)
 }
+
+::-webkit-scrollbar 
+{
+  width: 5px;
+}
+
+::-webkit-scrollbar-track 
+{
+  background: black;
+}
+
+::-webkit-scrollbar-thumb 
+{
+  background: rgb(66, 66, 66);
+}
+
+::-webkit-scrollbar-thumb:hover 
+{
+  background: black;
+}

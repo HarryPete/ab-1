@@ -1,14 +1,13 @@
 'use client'
 
 import Image from "next/image";
-import Header from "./components/header/Header";
 import styles from './styles.module.css'
-import MockForm from "./components/mockForm/MockForm";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import MockCard from "./components/mockCard/MockCard";
-import Feedback from "./components/feedback/Feedback";
+import Header from "../components/header/Header";
+import MockForm from "../components/mockForm/MockForm";
+import MockCard from "../components/mockCard/MockCard";
 
 export default function Home() 
 {

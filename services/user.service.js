@@ -1,3 +1,4 @@
+import { Mock } from "@/models/mock.model";
 import { User } from "@/models/user.model";
 
 class userService 
@@ -47,7 +48,8 @@ class userService
     {
         try
         {
-            const user = await User.findById(id); 
+            const user = await User.findById(id)
+            .populate({path: 'mocks', model: Mock}); 
             return user;
         }
         catch(error)

@@ -16,7 +16,7 @@
 {
     color: var(--secondary-color);
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .title,.user
@@ -41,6 +41,14 @@
     padding: 5px 12px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.routes
+{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    color: white;
 }
 
 .route
@@ -86,4 +94,24 @@
     background-color: var(--secondary-color);
     border: 1px solid var(--secondary-color);
     color: white;
+}
+
+.nav:hover
+{
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.feedback
+{
+    background-color: rgba(0,0,0,0.75);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
 }

@@ -120,8 +120,7 @@ const MockForm = () =>
             </FormControl>
             <TextField name='questions' value={questions} onChange={(e)=> setQuestions(e.target.value)} label='Numer of questions' placeholder='Ex.5'/>
             <div className={styles.controls}>
-                <button className={styles.cancel}>Clear</button>
-                <button className={styles.submit} type="submit">Submit</button>
+                <button className={styles.submit} type="submit">Create mock</button>
             </div>
         </form>
     )
