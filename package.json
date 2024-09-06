@@ -23,6 +23,7 @@
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
     "drizzle-orm": "^0.33.0",
+    "mongoose": "^8.6.1",
     "next": "14.2.7",
     "next-auth": "^5.0.0-beta.20",
     "notistack": "^3.0.1",
