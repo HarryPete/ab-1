@@ -102,7 +102,7 @@ const MockForm = () =>
         {            
           prompt = `Preparing for my upcoming interview for the role ${role} with ${experience} 
           years of experience, with the skillsets ${description}. Provide ${questions} ${type} 
-          questions and answers in JSON`
+          questions and answers in JSON format with fields question and answer`
           runChat(prompt)
         }
         catch(error)
@@ -131,7 +131,12 @@ const MockForm = () =>
             <TextField name='questions' value={questions} onChange={(e)=> setQuestions(e.target.value)} label='Numer of questions' placeholder='Minimum 2 questions'/>
             {error && <p className={styles.error}>All the fields are required*</p>}
             <div className={styles.controls}>
-              {isLoading ? <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/> : <button className={styles.submit} type="submit">Create mock</button>}
+              <button className={styles.submit} type="submit">Create mock</button>
+              {isLoading && 
+              <div className={styles.spinner}>
+                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+                <p className={styles.message}>Creating Personalised mock Interview</p>
+            </div>}
             </div>
         </form>
     )

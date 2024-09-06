@@ -95,7 +95,7 @@ const Signup = () =>
             {/* <Header/> */}
            <div className={styles.container}> 
                 <div className={styles.header}>
-                    <p className={styles.logo}>Mock Hub</p>
+                    <p className={styles.title} onClick={()=> router.push('/')}><span className={styles.mock}>Mock</span> Hub</p>
                 </div>
                 <div className={styles.form}>
                     <form className={styles.form} onSubmit={handleSubmit}>

@@ -165,6 +165,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             {isLoading && 
             <div className={styles.spinner}>
                 <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+                <p className={styles.message}>Analyzing</p>
             </div>}
 
             <ul className={styles.answer}>

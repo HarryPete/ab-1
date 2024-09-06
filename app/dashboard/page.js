@@ -69,7 +69,7 @@ export default function Home()
                         <MockCard mock={mock}/>
                     )).filter((mock)=> mock.props.mock.response.length)}
                 </div>
-            </div>:
+            </div> :
             <div className={styles.spinner}>
                 <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
             </div>}

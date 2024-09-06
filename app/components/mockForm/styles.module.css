@@ -36,12 +36,25 @@
 
 .spinner
 {
-    background-color: rgba(0,0,0,0.5);
-    height: calc(100vh - 60px);
+    height: 100vh;
     width: 100vw;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.7);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    row-gap: 10px;
+    z-index: 10;
+}
+
+.message
+{
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
 }
 
 .error

@@ -6,6 +6,7 @@ import styles from './styles.module.css'
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import heroImage from '@/assets/mockhub.jpg'
+import Footer from "./components/footer/Footer";
 
 export default function Home() 
 {
@@ -16,6 +17,7 @@ export default function Home()
                 <Image className={styles.mockhub} src={heroImage} alt='mockhub'/>
                 <p className={styles.header}>Get Interview Ready <span className={styles.active}>Anytime</span></p>   
             </div>
+            <Footer/>
         </div>
   );
 }

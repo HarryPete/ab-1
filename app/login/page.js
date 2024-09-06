@@ -64,7 +64,7 @@ const Login = () =>
             {/* <Header/> */}
            <div className={styles.container}> 
                 <div className={styles.header}>
-                    <p className={styles.logo}>Mock Hub</p>
+                    <p className={styles.title} onClick={()=> router.push('/')}><span className={styles.mock}>Mock</span> Hub</p>
                     <p className={styles.welcome}>Welcome back!</p>
                 </div>
                 <div className={styles.form}>

@@ -25,12 +25,17 @@
     margin-bottom: 20px;
 }
 
-.logo
+.mock
 {
-    text-align: center;
+    color: var(--primary-color);
+}
+
+.title
+{
+    color: var(--secondary-color);
     font-size: 36px;
-    font-weight: 750;
-    color: rgb(0, 177, 94);
+    font-weight: 800;
+    cursor: pointer;
 }
 
 .welcome

@@ -24,7 +24,7 @@
 .mockhub
 {
     width: 100%;
-    height: calc(80vh - 65px);
+    height: calc(80vh - 45px);
     object-fit: cover;
     object-position: center;
 }

@@ -1,0 +1,40 @@
+.container
+{
+    background-color: rgb(235, 235, 235);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+}
+
+.mock
+{
+    color: var(--primary-color);
+}
+
+.title
+{
+    color: var(--secondary-color);
+    font-size: 28px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.emailWrapper
+{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.email
+{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.emailIcon
+{
+    height: 30px;
+    width: fit-content;
+}
