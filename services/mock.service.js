@@ -28,6 +28,18 @@ class mockService
             throw error
         }
     }
+
+    async updateResponses(mockId, response)
+    {
+        try
+        {
+            return await Mock.findByIdAndUpdate(mockId, {$set: {response}})
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
 }
 
 export default mockService

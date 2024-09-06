@@ -49,10 +49,11 @@ const Mock = () =>
             <div className={styles.container}>
                 <div className={styles.questions}>
                     <div className={styles.header}>
+                        {/* <p>{activeIndex+1}/{mockData.query.length}</p> */}
                         <div className={styles.questionPills}>
                         {mockData.query.map((_, index)=>
                         (
-                            <QuestionPill index={index} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
+                            <QuestionPill key={index} index={index} activeIndex={activeIndex}/>
                         ))}
                         </div>
                         <p className={styles.question}>{mockData.query[activeIndex].question}</p>
@@ -72,12 +73,13 @@ const Mock = () =>
                     </div>
                 </div>
                 <div className={styles.responses}>
-                    <Recording/>
+                    <Recording mockData={mockData} 
+                    setActiveIndex={setActiveIndex} activeIndex={activeIndex}/>
                     <div></div>
                 </div>
-                <div className={styles.checkMedia}>
+                {/* <div className={styles.checkMedia}>
                     <StartMockDialogue/>
-                </div>                
+                </div>                 */}
             </div>
             }
         </div>

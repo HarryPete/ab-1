@@ -4,7 +4,7 @@ const QuestionPill = ({index, activeIndex, setActiveIndex}) =>
 {
 
     return(
-        <div className={index === activeIndex ? `${styles.container} ${styles.activePill}` : styles.container } onClick={()=> setActiveIndex(index)}>
+        <div className={index === activeIndex ? `${styles.container} ${styles.activePill}` : styles.container }>
             Q. {index+1}
         </div>
     )

@@ -1,0 +1,48 @@
+.container
+{
+    background-color: white;
+    width: 500px;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.webcam
+{
+    height: 50px;
+    width: fit-content;
+}
+
+.record
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note
+{
+    background-color: rgb(255, 254, 167);
+    border: 1px solid rgb(228, 226, 104);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.webButton
+{
+    background-color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.answer
+{
+    height: 30px;
+    width: 100%;
+}

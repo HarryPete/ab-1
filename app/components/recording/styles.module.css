@@ -1,3 +1,10 @@
+.container
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
 .webWrapper
 {
     width: 100%;
@@ -8,12 +15,24 @@
     border: 1px solid rgb(216, 216, 216);
     background-color: rgb(245, 245, 245);
     border-radius: 5px;
+    position: relative;
 }
 
 .webcam
 {
     width: fit-content;
     height: 50%;
+}
+
+.webcamButton
+{
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
 }
 
 .webButton
@@ -23,21 +42,20 @@
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    margin-top: 10px;
 }
 
 .record
 {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+    justify-content: end;
+    column-gap: 10px;
 }
 
 .answer
 {
     overflow-y: scroll;
-    height: 160px;
+    height: 193px;
     border: 1px solid rgb(216, 216, 216);
     border-radius: 5px;
     padding: 20px;
