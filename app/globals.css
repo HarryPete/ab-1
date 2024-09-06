@@ -5,7 +5,9 @@
 :root
 {
   --primary-color: rgb(0, 54, 116);
-  --secondary-color: rgb(0, 177, 94)
+  --secondary-color: rgb(0, 177, 94);
+  --success-bg: rgb(241, 251, 234);
+  --warning-bg: rgb(255, 255, 178);
 }
 
 ::-webkit-scrollbar 
@@ -15,15 +17,10 @@
 
 ::-webkit-scrollbar-track 
 {
-  background: black;
+  background: rgb(231, 231, 231);
 }
 
 ::-webkit-scrollbar-thumb 
 {
-  background: rgb(66, 66, 66);
-}
-
-::-webkit-scrollbar-thumb:hover 
-{
-  background: black;
+  background: rgb(116, 116, 116);
 }

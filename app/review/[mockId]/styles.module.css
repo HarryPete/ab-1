@@ -1,0 +1,51 @@
+.container
+{
+    width: 100%;
+    display: flex;
+    column-gap: 20px;
+    padding: 40px 15vw;
+}
+
+.info
+{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.mockInfo
+{
+    background-color: rgb(225, 237, 255);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    border-radius: 5px;
+    border: 1px solid rgb(144, 186, 248);
+    height: fit-content;
+}
+
+.review
+{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+
+.footer
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.date
+{
+    font-size: 18px;
+    font-weight: 600;
+}

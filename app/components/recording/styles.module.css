@@ -38,9 +38,14 @@
 .webButton
 {
     background-color: var(--primary-color);
-    padding: 8px 15px;
+    padding: 5px 10px;
     border-radius: 5px;
     color: white;
+}
+
+.webButton:hover
+{
+    background-color: var(--secondary-color);
     cursor: pointer;
 }
 

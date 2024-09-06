@@ -10,7 +10,7 @@ export async function doLogout()
 
 export async function googleLogin()
 {
-    await signIn('google', {redirectTo: '/'});
+    await signIn('google', {redirectTo: '/dashboard'});
 } 
 
 export async function credentialLogin(formData) 

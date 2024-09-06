@@ -1,0 +1,41 @@
+.container
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    row-gap: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 5px;
+}
+
+.yellow, .green
+{
+    padding: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.yellow
+{
+    background-color: var(--warning-bg);
+}
+
+.green
+{
+    background-color: var(--success-bg);
+}
+
+.title
+{
+    margin: 0;
+}
+
+.feedback
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}

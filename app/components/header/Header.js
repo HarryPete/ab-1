@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import Feedback from '../feedback/Feedback'
+import Logout from '../logout/Logout'
 
 const Header = () =>
 {
@@ -15,10 +16,10 @@ const Header = () =>
 
     return(
         <div className={styles.container}>
-            <p className={styles.title}><span className={styles.mock}>Mock</span> Hub</p>
+            <p className={styles.title} onClick={()=> router.push('/')}><span className={styles.mock}>Mock</span> Hub</p>
             {status === 'authenticated' ?
             <div className={styles.routes}>
-                <p className={styles.nav} >Dashboard</p>
+                <p className={styles.nav} onClick={()=> router.push('/dashboard')}>Dashboard</p>
                 <p className={styles.nav} onClick={()=> setFeedbackForm(true)}>Feedback</p>
                 <p className={styles.user} onClick={()=> setShowDropdown(!showDropdown)}>{showDropdown ? 'X' : data.user.name.charAt(0)}</p> 
             </div> :
@@ -30,7 +31,7 @@ const Header = () =>
            <div className={styles.dropdown}>
                 <p>{data.user.name}</p>
                 <p>{data.user.email}</p>
-                <button className={styles.logout} onClick={()=> router.push('/logout')}>Logout</button>
+                <Logout/>
             </div>}
             {feedbackForm && <div className={styles.feedback}>
                 <Feedback setFeedbackForm={setFeedbackForm}/>

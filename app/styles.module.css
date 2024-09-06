@@ -7,29 +7,24 @@
     font-size: 15px;
 }
 
-.greet
+.header, .active
 {
-    font-size: 40px;
-    font-weight: 700;
+    text-align: center;
+    font-size: 64px;
+    font-weight: 800;
     color: var(--primary-color);
+    margin-top: 20px;
 }
 
-.user
+.active
 {
     color: var(--secondary-color);
 }
 
-.mocks
+.mockhub
 {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 15px;
-    row-gap: 15px;
-}
-
-.mockTitle
-{
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--primary-color);
+    width: 100%;
+    height: calc(80vh - 65px);
+    object-fit: cover;
+    object-position: center;
 }

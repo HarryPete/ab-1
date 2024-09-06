@@ -3,12 +3,10 @@
 import Image from "next/image";
 import Header from "./components/header/Header";
 import styles from './styles.module.css'
-import MockForm from "./components/mockForm/MockForm";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import MockCard from "./components/mockCard/MockCard";
-import Feedback from "./components/feedback/Feedback";
+import heroImage from '@/assets/mockhub.jpg'
 
 export default function Home() 
 {
@@ -50,18 +48,11 @@ export default function Home()
     return (
         <div className={styles.wrapper}>
             <Header/>
-            {userData && 
-            <div className={styles.container}>
-                <p className={styles.greet}>{greeting}<span className={styles.user}> {data.user.name.split(' ')[0]}</span></p>
-                <MockForm/>
-                <p className={styles.mockTitle}>Review Mocks</p>
-                <div className={styles.mocks}>
-                    {userData.mocks.map((mock)=>
-                    (
-                        <MockCard mock={mock}/>
-                    ))}
-                </div>
-            </div>}
+            <div>
+                <Image className={styles.mockhub} src={heroImage} alt='mockhub'/>
+                <p className={styles.header}>Get Interview Ready <span className={styles.active}>Anytime</span></p>
+                
+            </div>
         </div>
   );
 }
