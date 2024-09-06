@@ -21,16 +21,14 @@ const mockSchema = new Schema({
         type: String, 
         required: true
     },
-    questions:
-    [{
-        type: String,
-        required: true
-    }],
-    responses:
-    [{
-        type: String,
-        required: true
-    }]
+    query:
+    {
+        type: [Schema.Types.Mixed]
+    },
+    response:
+    {
+        type: [Schema.Types.Mixed]
+    },
 },
 {
     timestamps: true

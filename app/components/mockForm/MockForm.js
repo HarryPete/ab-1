@@ -4,12 +4,20 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
 import { CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import styles from './styles.module.css'
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
 const MockForm = () =>
 {
 
-    const [ response, setResponse ] = useState("");
     const [ isLoading, setIsLoading ] = useState(false);
+    // const [ query, setQuery ] = useState(null) 
+    const [ role, setRole] = useState('')
+    const [ description, setDescription] = useState('')
+    const [ experience, setExperience] = useState('')
+    const [ type, setType ] = useState('')
+    const [ questions, setQuestions ] = useState('')
+    const { data } = useSession()
 
     async function runChat(prompt) 
     {
@@ -57,11 +65,24 @@ const MockForm = () =>
       ],
     })
 
-    setIsLoading(true)
     const result = await chat.sendMessage(prompt);
-    const response = result.response;
-    setResponse((response.text()).replace('```json','').replace('```','').split('```')[0]);
-    setIsLoading(false)
+    const query = result.response.text();
+    const startIndex = query.indexOf("[");
+    const endIndex = query.lastIndexOf("]") + 1; 
+    
+    const queries = JSON.parse(query.slice(startIndex, endIndex));
+    console.log(queries)
+   
+    try
+    {
+      const url = `/api/mock/create/${data.user.id}`
+      const response = await axios.post(url, {role, description, experience, type, query: queries});
+      console.log(response.data.message);
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
   }
 
     const handleSubmit = async (e) =>
@@ -69,16 +90,11 @@ const MockForm = () =>
         e.preventDefault()
         
         try
-        {
-            const formData = new FormData(e.currentTarget)
-            const role = formData.get('role');
-            const description = formData.get('description');
-            const experience = formData.get('experience');
-            const questions = formData.get('questions');
-            const type = formData.get('type');
-            
-            prompt = `Preparing for my upcoming interview for the role ${role} with ${experience} years of experience, with the skillsets ${description}. Provide ${questions} ${type} questions and answers in array of objects`
-            runChat(prompt)
+        {            
+          prompt = `Preparing for my upcoming interview for the role ${role} with ${experience} 
+          years of experience, with the skillsets ${description}. Provide ${questions} ${type} 
+          questions and answers in JSON`
+          runChat(prompt)
         }
         catch(error)
         {
@@ -88,12 +104,12 @@ const MockForm = () =>
 
     return(
         <form onSubmit={handleSubmit} className={styles.form}>
-            <TextField name='role' label='Job Role' placeholder='Ex.Frontend developer'/>
-            <TextField name='description' label='Job Description' placeholder='Ex.HTML, CSS, Javascript, React'/>
-            <TextField name='experience' label='Experience' placeholder='Ex.2'/>
+            <TextField name='role' value={role} onChange={(e)=> setRole(e.target.value)} label='Job Role' placeholder='Ex.Frontend developer'/>
+            <TextField name='description' value={description} onChange={(e)=> setDescription(e.target.value)} label='Job Description' placeholder='Ex.HTML, CSS, Javascript, React'/>
+            <TextField name='experience' value={experience} onChange={(e)=> setExperience(e.target.value)} label='Experience' placeholder='Ex.2'/>
             <FormControl fullWidth>
                 <InputLabel>Type of questions</InputLabel>
-                <Select name="type" label='Type of questions'>
+                <Select name="type" label='Type of questions' value={type} onChange={(e)=> setType(e.target.value)}>
                     <MenuItem value='Technical'>Technical</MenuItem>
                     <MenuItem value='Situational'>Situational</MenuItem>
                     <MenuItem value='Problem-solving'>Problem solving</MenuItem>
@@ -102,7 +118,7 @@ const MockForm = () =>
                     <MenuItem value='Career goals'>Salary expectation</MenuItem>
                 </Select>
             </FormControl>
-            <TextField name='questions' label='Numer of questions' placeholder='Ex.5'/>
+            <TextField name='questions' value={questions} onChange={(e)=> setQuestions(e.target.value)} label='Numer of questions' placeholder='Ex.5'/>
             <div className={styles.controls}>
                 <button className={styles.cancel}>Clear</button>
                 <button className={styles.submit} type="submit">Submit</button>

@@ -72,7 +72,7 @@ class userService
     {
         try
         {
-            return await User.findById(userId, {$push: {mocks: mockId}}) 
+            return await User.findByIdAndUpdate(userId, {$push: {mocks: mockId}}) 
         }
         catch(error)
         {

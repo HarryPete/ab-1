@@ -9,17 +9,17 @@ const Header = () =>
 {
     const [ showDropdown, setShowDropdown ] = useState(false);
     const router = useRouter();
-    const { data } = useSession();
+    const { data, status } = useSession();
 
     return(
         <div className={styles.container}>
             <p className={styles.title}><span className={styles.mock}>Mock</span> Hub</p>
-            {data?.user ? 
+            {status === 'authenticated' ?
             <p className={styles.user} onClick={()=> setShowDropdown(!showDropdown)}>{showDropdown ? 'X' : data.user.name.charAt(0)}</p> :
-            <div className={styles.navigation}>
+            (status === 'loading' ? <></> : <div className={styles.navigation}>
                 <button className={styles.route} onClick={()=> router.push('/login')}>Login</button>
                 <button className={styles.route} onClick={()=> router.push('/signup')}>Sign up</button>
-            </div>}
+            </div>)}
            {showDropdown && 
            <div className={styles.dropdown}>
                 <p>{data.user.name}</p>

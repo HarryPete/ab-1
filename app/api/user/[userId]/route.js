@@ -19,19 +19,19 @@ export async function GET(req, {params})
     } 
 }
 
-export async function PUT(req, {params})
-{ 
-    try
-    { 
-        await dbConnect();
+// export async function PUT(req, {params})
+// { 
+//     try
+//     { 
+//         await dbConnect();
          
-        const { userId } = params;
-        const { questions } = await req.json();
-        const user = await userInstance.findById(userId);
-        return NextResponse.json(user)
-    }  
-    catch(error)
-    { 
-        return NextResponse.json({error: error.message})
-    } 
-}
+//         const { userId } = params;
+//         const { role, description, experience, type, questions } = await req.json();
+//         const user = await userInstance.findById(userId);
+//         return NextResponse.json(user)
+//     }  
+//     catch(error)
+//     { 
+//         return NextResponse.json({error: error.message})
+//     } 
+// }

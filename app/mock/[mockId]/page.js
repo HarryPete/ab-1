@@ -1,0 +1,87 @@
+'use client'
+
+import axios from 'axios';
+import styles from './styles.module.css'
+import { useParams } from "next/navigation"
+import { useEffect, useState } from "react";
+import Header from '@/app/components/header/Header';
+import QuestionPill from '@/app/components/questionPill/QuestionPill';
+import Recording from '@/app/components/recording/Recording';
+import Image from 'next/image';
+import sound from '@/assets/sound.png'
+import StartMockDialogue from '@/app/components/startMockDialogue/StartMockDialogue';
+
+const Mock = () =>
+{
+
+    const { mockId } = useParams();
+    const [ mockData, setMockData ] = useState(null);
+    const [ activeIndex, setActiveIndex ] = useState(0);
+
+    const getMockData = async () =>
+    {
+        const url = `/api/mock/${mockId}`
+        const response = await axios.get(url);
+        setMockData(response.data)
+    }
+
+    useEffect(()=>
+    {
+        getMockData();
+    },[])
+
+    const handleTextToSpeech = () =>
+    {
+        if('speechSynthesis' in window)
+        {
+            const speech = new SpeechSynthesisUtterance(mockData.query[activeIndex].question);
+            window.speechSynthesis.speak(speech)
+        }
+        else
+            alert('Text to speech is not supported')
+
+    }
+
+    return(
+        <div className={styles.wrapper}>
+            <Header/>
+            {mockData && 
+            <div className={styles.container}>
+                <div className={styles.questions}>
+                    <div className={styles.header}>
+                        <div className={styles.questionPills}>
+                        {mockData.query.map((_, index)=>
+                        (
+                            <QuestionPill index={index} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
+                        ))}
+                        </div>
+                        <p className={styles.question}>{mockData.query[activeIndex].question}</p>
+                        <Image className={styles.sound} src={sound} alt='sound' onClick={()=> handleTextToSpeech()}/>
+                    </div>
+                    <div className={styles.footer}>
+                        <div className={styles.mockInfo}>
+                            <p><strong>Role: </strong>{mockData.role}</p>
+                            <p><strong>Description: </strong>{mockData.description}</p>
+                            <p><strong>Experience: </strong>{mockData.experience} years</p>
+                            <p><strong>Category: </strong>{mockData.type}</p>
+                        </div>
+                        <p className={styles.note}>
+                            <strong>Note: </strong> This mock interview is designed to help you practice
+                            with your webcam on. Feel free to turn off your camera at any time if you need to.
+                        </p>
+                    </div>
+                </div>
+                <div className={styles.responses}>
+                    <Recording/>
+                    <div></div>
+                </div>
+                <div className={styles.checkMedia}>
+                    <StartMockDialogue/>
+                </div>                
+            </div>
+            }
+        </div>
+    )
+} 
+
+export default Mock

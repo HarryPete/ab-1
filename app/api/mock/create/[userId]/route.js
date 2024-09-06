@@ -12,10 +12,10 @@ export async function POST(req, {params})
         await dbConnect();
          
         const { userId } = params;
-        const { role, description, experience, type, questions } = await req.json();
-        const mock = await mockInstance.createMock(role, description, experience, type, questions) 
+        const { role, description, experience, type, query } = await req.json();
+        const mock = await mockInstance.createMock(role, description, experience, type, query) 
         await userInstance.addMockToUser(userId, mock._id);
-        return NextResponse.json({message: 'Mock interview created'})
+        return NextResponse.json({mock, message: 'Mock interview created'})
     }  
     catch(error)
     { 
