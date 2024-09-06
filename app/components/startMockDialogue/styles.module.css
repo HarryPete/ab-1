@@ -10,17 +10,19 @@
     row-gap: 20px;
 }
 
-.webcam
-{
-    height: 50px;
-    width: fit-content;
-}
-
 .record
 {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.instructions
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    line-height: 24px;
 }
 
 .note
@@ -37,12 +39,30 @@
     padding: 8px 15px;
     border-radius: 5px;
     color: white;
-    cursor: pointer;
     margin-top: 10px;
+}
+
+.webButton:hover
+{
+    background-color: var(--secondary-color);
+    cursor: pointer;
 }
 
 .answer
 {
     height: 30px;
     width: 100%;
+}
+
+.mock
+{
+    color: var(--primary-color);
+}
+
+.title
+{
+    color: var(--secondary-color);
+    font-size: 32px;
+    font-weight: 800;
+    cursor: pointer;
 }

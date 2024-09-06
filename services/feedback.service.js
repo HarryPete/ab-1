@@ -6,8 +6,8 @@ class feedbackService
     {
         try
         {
-            const feedback = await Feedback.create({user, rating, feedback})
-            return await mock.save();
+            const newFeedback = await Feedback.create({user, rating, feedback})
+            return await newFeedback.save();
         }
         catch(error)
         {

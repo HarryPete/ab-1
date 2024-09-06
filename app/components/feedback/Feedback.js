@@ -20,6 +20,7 @@ const Feedback = ({setFeedbackForm}) =>
             const url = `/api/feedback/${data.user.id}`
             const response = await axios.post(url, {rating: value, feedback})
             console.log(response.data.message);
+            setFeedbackForm(false)
         }
         catch(error)
         {
@@ -27,6 +28,8 @@ const Feedback = ({setFeedbackForm}) =>
         }
         setFeedback('')
     }    
+
+    console.log(feedback, value)
 
     return(
         <div className={styles.container}>
@@ -36,7 +39,7 @@ const Feedback = ({setFeedbackForm}) =>
                 and provide the best possible experience for you.
             </p>
             <Rating name="simple-controlled" value={value} onChange={(event, newValue) => {setValue(newValue)}} size="large"/>
-            <TextField className={styles.feedback} label='Feedback' fullWidth/>
+            <TextField className={styles.feedback} label='Feedback' fullWidth onChange={(e)=> setFeedback(e.target.value)}/>
             <button className={styles.submit} onClick={handleSubmit}>Submit</button>
             <p className={styles.close} onClick={()=> setFeedbackForm(false)}>X</p>
         </div>

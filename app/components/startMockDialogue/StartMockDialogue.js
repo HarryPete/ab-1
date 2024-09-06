@@ -1,37 +1,21 @@
-import { useEffect, useState } from 'react';
 import styles from './styles.module.css'
-import useSpeechToText from 'react-hook-speech-to-text';
-import Webcam from 'react-webcam';
-import webcam from '@/assets/webcam.png'
-import Image from 'next/image';
-import successIcon from '@/assets/success-icon.png'
 
-const StartMockDialogue = () =>
+const StartMockDialogue = ({setShowInstructions}) =>
 {
-
-    const { error, interimResult, isRecording, results,
-        startSpeechToText, stopSpeechToText } = 
-        useSpeechToText({ continuous: true, useLegacyResults: false });
-    const [ showWebcam, setShowWebam ] = useState(false);
 
     return(
         <div className={styles.container}>
-            <div className={styles.webWrapper}>
-            {showWebcam ? 
-                <Webcam onUserMedia={()=> setShowWebam(true)} onUserMediaError={()=> setShowWebam(false)} mirrored={true}/> : <Image className={styles.webcam} src={webcam} alt='webcam'/>}
+            <p className={styles.title} onClick={()=> router.push('/')}><span className={styles.mock}>Mock</span> Hub</p>
+            
+            <div className={styles.instructions}>
+                <p className={styles.instruction}>1. Click on the volume icon to listen to the question</p>
+                <p className={styles.instruction}>2. Before you begin answering, click on <strong>Start Recording</strong></p>
+                <p className={styles.instruction}>3. Once you finish answering, click on <strong>Stop Recording</strong> and then click on <strong>Submit</strong></p>
+                <p className={styles.instruction}>4. Click on <strong>Clear Answer</strong> to record your answer again</p>
+                <p className={styles.instruction}>5. Once you <strong>Finish</strong> you can review your performance from your dashboard</p>
             </div>
 
-            <div className={styles.record}>
-                
-                
-                <button className={styles.webButton} 
-                    onClick={()=> setShowWebam(!showWebcam)}>
-                    {showWebcam ? 'Disable Webcam' : 'Test Webcam'}
-                </button> 
-                <button className={styles.webButton} onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-                    {isRecording ? (interimResult ? 'Testing' : <Image className={styles.success} src={successIcon} alt='success'/>) : 'Test Microphone'}
-                </button> 
-            </div>
+            <button className={styles.webButton}  onClick={()=> setShowInstructions(false)}>Start Mock Interview</button>
 
             <p className={styles.note}>
                 <strong>Note: </strong> This mock interview is designed to help you practice

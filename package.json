@@ -25,6 +25,7 @@
     "drizzle-orm": "^0.33.0",
     "next": "14.2.7",
     "next-auth": "^5.0.0-beta.20",
+    "notistack": "^3.0.1",
     "react": "^18.3.1",
     "react-dom": "^18",
     "react-hook-speech-to-text": "^0.8.0",

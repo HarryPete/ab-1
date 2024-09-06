@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addResponse } from '@/store/slices/mockReducer';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
+import { enqueueSnackbar } from 'notistack';
+import { CircularProgress } from '@mui/material';
 
-const Recording = ({question, setActiveIndex, activeIndex, mockData}) =>
+const Recording = ({setActiveIndex, activeIndex, mockData}) =>
 {
 
     const { error, interimResult, isRecording, results, setResults,
@@ -22,6 +24,7 @@ const Recording = ({question, setActiveIndex, activeIndex, mockData}) =>
     const [ answer,  setAnswer ] = useState(null);
     const disptach = useDispatch();
     const responses = useSelector((state)=> state.mockResponse.response);
+    const [ isLoading, setIsLoading ] = useState(false);
     const {mockId} = useParams();
     const router = useRouter();
 
@@ -82,48 +85,55 @@ const Recording = ({question, setActiveIndex, activeIndex, mockData}) =>
 
     const result = await chat.sendMessage(prompt);
     const query = result.response.text();
-    console.log(query)
     const startIndex = query.indexOf("{");
     const endIndex = query.lastIndexOf("}") + 1; 
     const response = JSON.parse(query.slice(startIndex, endIndex));
+    
 
     if(activeIndex+1 < mockData.query.length)
     {
         disptach(addResponse(response));
+        setIsLoading(false)
         setActiveIndex((prev)=> prev+1)
         setResults([]);
     }     
     else
     {
+        setIsLoading(true)
         const feedback = [...responses, response]
         try
         {
             const url = `/api/mock/${mockId}`
             const response = await axios.put(url, {responses: feedback});
-            console.log(response.data.message);
-            router.push('/')
+            setIsLoading(false)
+            enqueueSnackbar(response.data.message)
+            router.push('/dashboard')
         }
         catch(error)
         {
-            console.log(error);
+            enqueueSnackbar(error.message)
+            setIsLoading(false)
         }
+        
     }
-  }
-  console.log(responses)
+    }
 
     const handleSubmit = async (e) =>
     {
         e.preventDefault()
+        if(!answer)
+            return enqueueSnackbar('Answer cannot be empty') 
         
         try
-        {            
-          prompt = `For the given interview question ${mockData.query[activeIndex].question} rate this answer ${answer} on scale of 10
-          and return JSON with fields rating and feedback in 3-4 lines`
-          runChat(prompt)
+        {      
+            setIsLoading(true)      
+            prompt = `For the given interview question ${mockData.query[activeIndex].question} rate this answer ${answer} on scale of 10
+            and feedback in 3-4 lines, return in JSON with fields rating and feedback`
+            runChat(prompt)
         }
         catch(error)
         {
-            console.log(error.message)
+            enqueueSnackbar(error.message)
         }
     }
 
@@ -142,15 +152,20 @@ const Recording = ({question, setActiveIndex, activeIndex, mockData}) =>
 
                 {answer && 
                 <button className={styles.webButton} onClick={()=> {setResults([]); setAnswer(null)}}>
-                    Clear answer
+                    Clear Answer
                 </button>}
 
                 <button className={styles.webButton} onClick={isRecording ? stopSpeechToText : startSpeechToText}>
                     {isRecording ? 'Stop Recording' : 'Start Recording'}
                 </button>
  
-                <button className={styles.webButton} onClick={handleSubmit}>{activeIndex+1 === mockData.query.length ? 'Finish' : 'Submit'}</button>
+                {answer && <button className={styles.webButton} onClick={handleSubmit}>{activeIndex+1 === mockData.query.length ? 'Finish' : 'Submit'}</button>}
             </div>
+
+            {isLoading && 
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+            </div>}
 
             <ul className={styles.answer}>
                 {results?.map((result) => (

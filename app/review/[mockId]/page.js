@@ -9,6 +9,7 @@ import Image from 'next/image';
 import ReviewCard from '@/app/components/reviewCard/ReviewCard';
 import { FormatDate } from '@/utils/FormatDate';
 import ColorCard from '@/app/components/colorCard/ColorCard';
+import { CircularProgress } from '@mui/material';
 
 const Review = () =>
 {
@@ -32,7 +33,7 @@ const Review = () =>
     return(
         <div className={styles.wrapper}>
             <Header/>
-            {mockData && 
+            {mockData ? 
             <div className={styles.container}>
                 <div className={styles.info}>
                     <div className={styles.mockInfo}>
@@ -53,6 +54,9 @@ const Review = () =>
                 {/* <div className={styles.footer}>
                         
                 </div> */}
+            </div>:
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
             </div>}   
         </div>
     )

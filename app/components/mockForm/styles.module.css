@@ -34,3 +34,19 @@
     color: white;
 }
 
+.spinner
+{
+    background-color: rgba(0,0,0,0.5);
+    height: calc(100vh - 60px);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error
+{
+    color: red;
+    font-weight: 600;
+}
+

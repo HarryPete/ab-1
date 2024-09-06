@@ -6,18 +6,21 @@ import styles from './styles.module.css'
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 
 const MockForm = () =>
 {
 
     const [ isLoading, setIsLoading ] = useState(false);
-    // const [ query, setQuery ] = useState(null) 
     const [ role, setRole] = useState('')
     const [ description, setDescription] = useState('')
     const [ experience, setExperience] = useState('')
     const [ type, setType ] = useState('')
     const [ questions, setQuestions ] = useState('')
+    const [ error, setError ] = useState(false);
     const { data } = useSession()
+    const router = useRouter();
 
     async function runChat(prompt) 
     {
@@ -69,25 +72,31 @@ const MockForm = () =>
     const query = result.response.text();
     const startIndex = query.indexOf("[");
     const endIndex = query.lastIndexOf("]") + 1; 
-    
     const queries = JSON.parse(query.slice(startIndex, endIndex));
-    console.log(queries)
    
     try
     {
       const url = `/api/mock/create/${data.user.id}`
       const response = await axios.post(url, {role, description, experience, type, query: queries});
-      console.log(response.data.message);
+      enqueueSnackbar(response.data.message);
+      router.push(`/mock/${response.data.mock._id}`)
     }
     catch(error)
     {
       console.log(error);
     }
+    setIsLoading(false);
   }
 
     const handleSubmit = async (e) =>
     {
-        e.preventDefault()
+        e.preventDefault();
+
+        if(!role || !description || !experience || !type || !questions || questions<2 )
+          return setError(true)
+
+
+        setIsLoading(true);
         
         try
         {            
@@ -98,7 +107,8 @@ const MockForm = () =>
         }
         catch(error)
         {
-            console.log(error.message)
+          enqueueSnackbar(error.message);
+          setIsLoading(false);
         }
     }
 
@@ -112,15 +122,16 @@ const MockForm = () =>
                 <Select name="type" label='Type of questions' value={type} onChange={(e)=> setType(e.target.value)}>
                     <MenuItem value='Technical'>Technical</MenuItem>
                     <MenuItem value='Situational'>Situational</MenuItem>
-                    <MenuItem value='Problem-solving'>Problem solving</MenuItem>
+                    <MenuItem value='Problem-Solving'>Problem solving</MenuItem>
                     <MenuItem value='Career goals'>Career goals</MenuItem>
                     <MenuItem value='Leadership'>Leadership</MenuItem>
                     <MenuItem value='Career goals'>Salary expectation</MenuItem>
                 </Select>
             </FormControl>
-            <TextField name='questions' value={questions} onChange={(e)=> setQuestions(e.target.value)} label='Numer of questions' placeholder='Ex.5'/>
+            <TextField name='questions' value={questions} onChange={(e)=> setQuestions(e.target.value)} label='Numer of questions' placeholder='Minimum 2 questions'/>
+            {error && <p className={styles.error}>All the fields are required*</p>}
             <div className={styles.controls}>
-                <button className={styles.submit} type="submit">Create mock</button>
+              {isLoading ? <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/> : <button className={styles.submit} type="submit">Create mock</button>}
             </div>
         </form>
     )

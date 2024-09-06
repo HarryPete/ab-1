@@ -10,6 +10,7 @@ import Recording from '@/app/components/recording/Recording';
 import Image from 'next/image';
 import sound from '@/assets/sound.png'
 import StartMockDialogue from '@/app/components/startMockDialogue/StartMockDialogue';
+import { CircularProgress } from '@mui/material';
 
 const Mock = () =>
 {
@@ -17,6 +18,7 @@ const Mock = () =>
     const { mockId } = useParams();
     const [ mockData, setMockData ] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(0);
+    const [ showInstructions, setShowInstructions ] = useState(false);
 
     const getMockData = async () =>
     {
@@ -45,7 +47,7 @@ const Mock = () =>
     return(
         <div className={styles.wrapper}>
             <Header/>
-            {mockData && 
+            {mockData ? 
             <div className={styles.container}>
                 <div className={styles.questions}>
                     <div className={styles.header}>
@@ -77,11 +79,14 @@ const Mock = () =>
                     setActiveIndex={setActiveIndex} activeIndex={activeIndex}/>
                     <div></div>
                 </div>
-                {/* <div className={styles.checkMedia}>
-                    <StartMockDialogue/>
-                </div>                 */}
-            </div>
-            }
+                <p className={styles.instructions} onClick={()=> setShowInstructions(true)}>Instructions</p>
+                {showInstructions && <div className={styles.checkMedia}>
+                    <StartMockDialogue setShowInstructions={setShowInstructions}/>
+                </div>}
+            </div> :
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+            </div>}
         </div>
     )
 } 

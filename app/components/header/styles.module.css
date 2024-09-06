@@ -1,6 +1,6 @@
 .container
 {
-    background-color: var(--primary-color);
+    background-color: rgb(235, 235, 235);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -9,13 +9,13 @@
 
 .mock
 {
-    color: white;
+    color: var(--primary-color);
 }
 
 .title
 {
     color: var(--secondary-color);
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 800;
     cursor: pointer;
 }
@@ -72,7 +72,8 @@
     flex-direction: column;
     align-items: flex-start;
     background-color: rgb(224, 224, 224);
-    row-gap: 10px;
+    border: 1px solid rgb(179, 179, 179);
+    row-gap: 20px;
     padding: 15px;
     border-radius: 5px;
     position: absolute;
@@ -97,6 +98,13 @@
     color: white;
 }
 
+.nav
+{
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .nav:hover
 {
     color: var(--secondary-color);
@@ -115,4 +123,9 @@
     align-items: center;
     justify-content: center;
     z-index: 10;
+}
+
+.active
+{
+    color: var(--secondary-color);
 }

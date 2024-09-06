@@ -34,3 +34,12 @@
     font-weight: 700;
     color: var(--primary-color);
 }
+
+.spinner
+{
+    height: calc(100vh - 60px);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
