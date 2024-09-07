@@ -55,9 +55,9 @@ export default function Home()
             <Header/>
             {isLoading ? 
             <div className={styles.container}>
-                <p className={styles.greet}>{greeting}<span className={styles.user}> {data.user.name.split(' ')[0]}</span></p>
+                {userData && <p className={styles.greet}>{greeting}<span className={styles.user}> {userData.name.split(' ')[0]}</span></p>}
                 <MockForm/>
-                {userData && 
+                {userData?.mocks?.length && 
                 <div className={styles.mockCards}>
                     <p className={styles.mockTitle}>Drafts</p>
                     <div className={styles.mocks}>
