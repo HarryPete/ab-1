@@ -29,6 +29,19 @@ class mockService
         }
     }
 
+    async getAllMocks()
+    {
+        try
+        {
+            const mocks = await Mock.find({}); 
+            return mocks;
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
     async updateResponses(mockId, response)
     {
         try

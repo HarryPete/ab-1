@@ -1,15 +1,15 @@
 import dbConnect from "@/dbConfig/dbConnect";
-import userService from "@/services/user.service";
 import { NextResponse } from "next/server";
-const userInstance = new userService();
+import mockService from "@/services/mock.service";
+const mockInstance = new mockService();
 
 export async function GET(req, res)
 { 
   try
   { 
     await dbConnect();
-    const users = await userInstance.getAllUsers()
-    return NextResponse.json(users);
+    const mocks = await mockInstance.getAllMocks()
+    return NextResponse.json(mocks);
   }  
   catch(error)
   { 

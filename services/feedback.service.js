@@ -32,8 +32,8 @@ class feedbackService
     {
         try
         {
-            const mock = await Feedback.findById(mockId)
-            return mock;
+            const feedbacks = await Feedback.find({})
+            return feedbacks;
         }
         catch(error)
         {

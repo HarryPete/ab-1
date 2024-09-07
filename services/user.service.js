@@ -1,5 +1,6 @@
 import { Mock } from "@/models/mock.model";
 import { User } from "@/models/user.model";
+import bcrypt from 'bcryptjs'
 
 class userService 
 {
@@ -50,6 +51,19 @@ class userService
         {
             const user = await User.findById(id)
             .populate({path: 'mocks', model: Mock}); 
+            return user;
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
+    async getAllUsers()
+    {
+        try
+        {
+            const user = await User.find({}); 
             return user;
         }
         catch(error)
