@@ -1,4 +1,4 @@
-.container
+.container, .mockCards
 {
     padding: 30px 10vw;
     display: flex;
@@ -17,6 +17,11 @@
 .user
 {
     color: var(--secondary-color);
+}
+
+.mockCards
+{
+    padding: 0;
 }
 
 .mocks

@@ -135,7 +135,7 @@ const MockForm = () =>
               {isLoading && 
               <div className={styles.spinner}>
                 <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
-                <p className={styles.message}>Creating Personalised mock Interview</p>
+                <p className={styles.message}>Creating Personalised Mock Interview</p>
             </div>}
             </div>
         </form>

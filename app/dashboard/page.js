@@ -9,12 +9,14 @@ import Header from "../components/header/Header";
 import MockForm from "../components/mockForm/MockForm";
 import MockCard from "../components/mockCard/MockCard";
 import { CircularProgress } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 
 export default function Home() 
 {
     const [ userData, setUserData ] = useState(null);
     const [ greeting, setGreeting] = useState('');
     const { data, status } = useSession();
+    const [ isLoading, setIsLoading ] = useState(true);
 
     const getUser = async () =>
     {
@@ -26,8 +28,9 @@ export default function Home()
         }
         catch(error)
         {
-            console.log(error)
+            enqueueSnackbar(error.message)
         }
+        setIsLoading(false)
     }
 
     useEffect(() => 
@@ -50,25 +53,28 @@ export default function Home()
     return (
         <div className={styles.wrapper}>
             <Header/>
-            {userData ? 
+            {isLoading ? 
             <div className={styles.container}>
                 <p className={styles.greet}>{greeting}<span className={styles.user}> {data.user.name.split(' ')[0]}</span></p>
                 <MockForm/>
-                <p className={styles.mockTitle}>Drafts</p>
-                <div className={styles.mocks}>
+                {userData && 
+                <div className={styles.mockCards}>
+                    <p className={styles.mockTitle}>Drafts</p>
+                    <div className={styles.mocks}>
                     {userData.mocks.map((mock)=>
                     (
                         <MockCard mock={mock}/>
                     )).filter((mock)=> !mock.props.mock.response.length)}
-                </div>
+                    </div>
 
-                <p className={styles.mockTitle}>Review Mocks</p>
-                <div className={styles.mocks}>
+                    <p className={styles.mockTitle}>Review Mocks</p>
+                    <div className={styles.mocks}>
                     {userData.mocks.map((mock)=>
                     (
                         <MockCard mock={mock}/>
                     )).filter((mock)=> mock.props.mock.response.length)}
-                </div>
+                    </div>
+                </div>}
             </div> :
             <div className={styles.spinner}>
                 <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
