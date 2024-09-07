@@ -4,7 +4,7 @@ import styles from './Register.module.css'
 import Image from 'next/image';
 import successicon from '../../assets/success-icon.png'
 import erroricon from '../../assets/error-icon.png'
-import { TextField } from '@mui/material';
+import { CircularProgress, TextField } from '@mui/material';
 // import { credentialLogin, googleLogin } from '@/app/action';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -18,6 +18,7 @@ const Signup = () =>
     const [ error, setError ] = useState(false);
     const [ successMessage, setSuccessMessage ] = useState('')
     const [ success, setSuccess ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false)
     const router = useRouter();
 
     const handleSubmit = async (e) =>
@@ -57,7 +58,8 @@ const Signup = () =>
         } 
 
         setError(false)
-        setErrorMessage('')
+        setErrorMessage('');
+        setIsLoading(true);
 
         try
         {
@@ -88,6 +90,7 @@ const Signup = () =>
             setError(true)
             setErrorMessage(error.message)
         }
+        setIsLoading(false);
     }
 
     return(
@@ -112,7 +115,11 @@ const Signup = () =>
                             <Image className={styles.successicon} src={successicon} alt='success'/>
                             <p className={styles.successMessage}>{successMessage}</p>
                         </div>}
-                        <button className={styles.submit} type='submit'>Sign up</button>
+                        {isLoading ? 
+                        <div className={styles.progress}>
+                            <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/> 
+                        </div>: 
+                        <button className={styles.submit} type='submit'>Sign up</button>}
                     </form>
                     <p className={styles.option}>or</p>
                     <GoogleAuth/>

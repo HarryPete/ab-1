@@ -53,7 +53,7 @@ export default function Home()
     return (
         <div className={styles.wrapper}>
             <Header/>
-            {isLoading ? 
+            {!isLoading ? 
             <div className={styles.container}>
                 {userData && <p className={styles.greet}>{greeting}<span className={styles.user}> {userData.name.split(' ')[0]}</span></p>}
                 <MockForm/>

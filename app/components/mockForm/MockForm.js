@@ -19,6 +19,7 @@ const MockForm = () =>
     const [ type, setType ] = useState('')
     const [ questions, setQuestions ] = useState('')
     const [ error, setError ] = useState(false);
+    const [ errorMessage, setErrorMessage ] = useState('') 
     const { data } = useSession()
     const router = useRouter();
 
@@ -92,10 +93,20 @@ const MockForm = () =>
     {
         e.preventDefault();
 
-        if(!role || !description || !experience || !type || !questions || questions<2 )
+        if(!role || !description || !experience || !type || !questions)
+        {
+          setErrorMessage('All the fields are required*')
           return setError(true)
+        }
 
+        if(questions<2 )
+        {
+          setErrorMessage('Atleast 2 questions are required to generate mock interview')
+          return setError(true)
+        }
 
+        setError(false)
+        setErrorMessage('')
         setIsLoading(true);
         
         try
@@ -129,7 +140,7 @@ const MockForm = () =>
                 </Select>
             </FormControl>
             <TextField name='questions' value={questions} onChange={(e)=> setQuestions(e.target.value)} label='Numer of questions' placeholder='Minimum 2 questions'/>
-            {error && <p className={styles.error}>All the fields are required*</p>}
+            {error && <p className={styles.error}>{errorMessage}</p>}
             <div className={styles.controls}>
               <button className={styles.submit} type="submit">Create mock</button>
               {isLoading && 
