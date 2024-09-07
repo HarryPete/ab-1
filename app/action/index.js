@@ -21,7 +21,7 @@ export async function credentialLogin(formData)
         {
             email: formData.get("email"),
             password: formData.get("password"),
-            redirect: false,
+            redirectTo: '/dashboard',
         });
     } 
     catch (error) 

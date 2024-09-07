@@ -48,9 +48,7 @@ const Login = () =>
 
         try 
         {
-            const response = await credentialLogin(formData);
-            if(!response)
-                return router.push('/dashboard')
+            await credentialLogin(formData);
             setError(true);
             setErrorMessage(response);
         } 

@@ -57,7 +57,7 @@ export default function Home()
             <div className={styles.container}>
                 {userData && <p className={styles.greet}>{greeting}<span className={styles.user}> {userData.name.split(' ')[0]}</span></p>}
                 <MockForm/>
-                {userData?.mocks?.length && 
+                {userData?.mocks?.length > 0 && 
                 <div className={styles.mockCards}>
                     <p className={styles.mockTitle}>Drafts</p>
                     <div className={styles.mocks}>
