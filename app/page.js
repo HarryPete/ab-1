@@ -8,21 +8,43 @@ import Footer from "./components/footer/Footer";
 import Stats from "./components/stats/Stats";
 import { useRouter } from "next/navigation";
 import Globe from "@/components/ui/globe";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { enqueueSnackbar } from "notistack";
+import Marquee from "@/components/ui/marquee";
+import axios from "axios";
+import CarouselCard from "./components/carouselCard/CarouselCard";
 // import Globe from "@/components/magicui/globe";
 
 export default function Home() 
 {
     const divRef = useRef();
+    const [ feedbacks, setFeedbacks ] = useState(null)
+
+    const getFeedbacks = async ()=>
+    {
+        try
+        {
+            const url = '/api/feedback';
+            const response = await axios.get(url);
+            setFeedbacks(response.data);
+        }
+        catch(error)
+        {
+            toast.error(error.message)
+        }
+    }
 
     useEffect(()=>
     {
+        getFeedbacks();
+
         const width = divRef.current.offsetWidth;
         if(width < 480)
             enqueueSnackbar('You seem to be using mobile screen. Use large screen for better experience')
     },[])
+
+    console.log(feedbacks);
 
     return (
         <div className={styles.wrapper}>
@@ -39,6 +61,16 @@ export default function Home()
                     {/* <button className={styles.route} onClick={()=> router.push('/dashboard')}>Get Started</button> */}
                 </div>   
             </div>
+           {feedbacks && 
+           <div className={styles.feedbacks}>
+                {/* <Marquee pauseOnHover vertical className="[--duration:20s]">
+                    {feedbacks.map((feedback)=>
+                    (
+                        <CarouselCard feedback={feedback} key={feedback._id}/>
+                    ))}
+                </Marquee> */}
+            </div>}
+
             <Footer/>
         </div>
   );

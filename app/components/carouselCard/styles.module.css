@@ -1,0 +1,49 @@
+.container
+{
+    width: 300px;
+    min-height: fit-content;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    color: white;
+    transition: opacity 1s ease-in-out;
+    border: 1px solid rgb(75,75,75);
+    row-gap: 10px;
+}
+
+.user, .feedback, .name
+{   
+    margin: 0;
+}
+
+.feedback
+{
+    line-height: 36px;
+}
+
+.user
+{
+    color: grey;
+    font-weight: 600;
+}
+
+ /* @media screen and (max-width: 1120px) 
+{
+    .container
+    {
+        min-width: calc(50% - 20px);
+    }
+} */
+
+
+@media screen and (max-width: 375px) 
+{
+    .container
+    {
+        width: 300px;
+    }
+} 
+
+
+

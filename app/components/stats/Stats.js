@@ -54,11 +54,11 @@ const Stats = () =>
                     <span className={styles.title}>Mocks Generated</span>
                     <p className={styles.count}>{mocks.length}</p>
                 </div>
-                <div className={styles.column}>
+                {/* <div className={styles.column}>
                     <Rating value={Math.round(rating/feedbacks.length)} readOnly/>
-                    {/* <span className={styles.title}>Rating</span>
-                    <p className={styles.count}>{Math.round(rating/feedbacks.length)}</p> */}
-                </div>
+                    <span className={styles.title}>Rating</span>
+                    <p className={styles.count}>{Math.round(rating/feedbacks.length)}</p>
+                </div> */}
             </div>}
         </div>
     )

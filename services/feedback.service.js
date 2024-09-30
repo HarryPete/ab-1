@@ -1,4 +1,5 @@
 import { Feedback } from "@/models/feedback.model";
+import { User } from "@/models/user.model";
 
 class feedbackService
 {
@@ -32,7 +33,7 @@ class feedbackService
     {
         try
         {
-            const feedbacks = await Feedback.find({})
+            const feedbacks = await Feedback.find().populate({path: 'user', model: User})
             return feedbacks;
         }
         catch(error)

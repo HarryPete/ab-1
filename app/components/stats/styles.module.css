@@ -77,9 +77,9 @@
         font-size: 24px;
     }
 
-    .column:nth-child(3)
+    /* .column:nth-child(3)
     {
         position: absolute;
         bottom: 60px;
-    }
+    } */
 }
