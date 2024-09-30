@@ -64,3 +64,22 @@
     }    
 }
 
+
+@media screen and (max-width: 480px)
+{
+    .title
+    {
+        font-size: 16px;
+    }   
+
+    .count
+    {
+        font-size: 24px;
+    }
+
+    .column:nth-child(3)
+    {
+        position: absolute;
+        bottom: 60px;
+    }
+}

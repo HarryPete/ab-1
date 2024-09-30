@@ -20,7 +20,6 @@ import { CircularProgress } from "@mui/material";
 
 const MockForm = () =>
 {
-
     const [ isLoading, setIsLoading ] = useState(false);
     const [ role, setRole] = useState('')
     const [ description, setDescription] = useState('')
@@ -132,11 +131,11 @@ const MockForm = () =>
         <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.group}>
               <p className={styles.label}>Role</p>
-              <Input className={styles.input} type="text" placeholder="Ex. Frontend Developer" name='role' value={role} onChange={(e)=> setRole(e.target.value)}/>
+              <Input className={styles.input} type="text" placeholder="Ex. Compliance analyst" name='role' value={role} onChange={(e)=> setRole(e.target.value)}/>
             </div>
             <div className={styles.group}>
               <p className={styles.label}>Skills</p>
-              <Input className={styles.input} type="text" placeholder='Ex. HTML, CSS, Javascript, React' name='description' value={description} onChange={(e)=> setDescription(e.target.value)}/>
+              <Input className={styles.input} type="text" placeholder='Ex. Investigating transactions, Periodc reviews, SAR/STR filing' name='description' value={description} onChange={(e)=> setDescription(e.target.value)}/>
             </div>
             <div className={styles.group}>
               <p className={styles.label}>Experience in years</p>
@@ -146,7 +145,7 @@ const MockForm = () =>
               <p className={styles.label}>Type of question</p>
               <Select className={styles.input} name="type" onValueChange={(value)=> setType(value)}>
               <SelectTrigger className={styles.input}>
-                <SelectValue />
+                <SelectValue placeholder='Choose' />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value='Technical'>Technical</SelectItem>

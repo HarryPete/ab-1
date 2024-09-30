@@ -176,3 +176,23 @@
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width:540px)
+{
+    .wrapper
+    {
+        padding: 0 20px;
+    }
+
+    .container
+    {
+        width: 100%;
+        padding: 20px;
+        font-size: 12px;
+    }
+
+    .title
+    {
+        height: 40px;
+    }
+}

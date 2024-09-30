@@ -8,14 +8,23 @@ import Footer from "./components/footer/Footer";
 import Stats from "./components/stats/Stats";
 import { useRouter } from "next/navigation";
 import Globe from "@/components/ui/globe";
+import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 // import Globe from "@/components/magicui/globe";
 
 export default function Home() 
 {
-    const router =  useRouter();
+    const divRef = useRef();
+
+    useEffect(()=>
+    {
+        const width = divRef.current.offsetWidth;
+        if(width < 420)
+            toast('You seem to be using mobile screen. Use large screens for better experience')
+    },[divRef])
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} ref={divRef}>
             <Header/>
             <div>
                 <div className={styles.globeWrapper}>
@@ -29,7 +38,7 @@ export default function Home()
                     {/* <button className={styles.route} onClick={()=> router.push('/dashboard')}>Get Started</button> */}
                 </div>   
             </div>
-            {/* <Footer/> */}
+            <Footer/>
         </div>
   );
 }

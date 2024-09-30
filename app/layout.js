@@ -8,7 +8,7 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Mock Hub",
+  title: "MockHub",
   description: "One stop solution for all mock tests and interviews",
 };
 

@@ -9,8 +9,8 @@ export async function POST(req, {params})
   { 
     await dbConnect();
     const { userId } = params;
-    const { rating, feedback } = await req.json();
-    await feedbackInstance.addFeedback(userId, rating, feedback)
+    const { rating, feedback, isPay } = await req.json();
+    await feedbackInstance.addFeedback(userId, rating, feedback, isPay)
     return NextResponse.json({message: 'Feedback recorded'});
   }  
   catch(error)

@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 10px;
+    row-gap: 20px;
     position: relative;
     border: 1px solid rgb(75,75,75);
 }
@@ -38,6 +38,11 @@
     border-radius: 5px;
     background-color: white;
     color: black;
+}
+
+.pay
+{
+    padding: 20px 5px;
 }
 
 .submit:hover

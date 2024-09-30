@@ -12,3 +12,11 @@
     background-color: white;
     color: black;
 }
+
+@media screen and (max-width: 480px)
+{
+    .container
+    {
+        padding: 5px;
+    }    
+}

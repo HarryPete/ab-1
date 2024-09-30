@@ -25,15 +25,15 @@ const Feedback = ({setFeedbackForm}) =>
         try
         {
             const url = `/api/feedback/${data.user.id}`
-            const response = await axios.post(url, {rating: value, feedback, isPay})
-            console.log(response.data.message);
-            setFeedbackForm(false)
+            const response = await axios.post(url, {rating: value, feedback, isPay});
+            toast.success(response.data.message);
+            setFeedback('');
+            setFeedbackForm(false);
         }
         catch(error)
         {
-            console.log(error);
+            toast.error(error.message);
         }
-        setFeedback('')
     }    
 
     console.log(isPay)
@@ -46,8 +46,8 @@ const Feedback = ({setFeedbackForm}) =>
             </p>
             <Rating name="simple-controlled" sx={{'& .MuiRating-iconEmpty': { color: 'grey'}}} value={value} onChange={(event, newValue) => {setValue(newValue)}} size="large"/>
             <Textarea className={styles.feedback} placeholder='Feedback' fullWidth onChange={(e)=> setFeedback(e.target.value)}/>
-            <Select className={styles.feedback} name="type" onValueChange={(value)=> setIsPay(value)}>
-              <SelectTrigger className={styles.feedback}>
+            <Select className={styles.pay} name="type" onValueChange={(value)=> setIsPay(value)}>
+              <SelectTrigger className={styles.pay}>
                 <SelectValue placeholder='Would you pay for such service?'/>
               </SelectTrigger>
               <SelectContent>

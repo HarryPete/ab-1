@@ -119,3 +119,33 @@
 {
     transform: scale(1.05);
 }
+
+@media screen and (max-width:1140px)
+{
+    .container
+    {
+        flex-direction: column;
+        row-gap: 20px;
+    }    
+
+    .questions, .responses
+    {
+        width: 100%;
+    }
+
+    .questions
+    {
+        row-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 480px)
+{
+    .container
+    {
+        padding: 40px;
+    }    
+}
+
+
+

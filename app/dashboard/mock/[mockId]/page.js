@@ -19,6 +19,7 @@ const Mock = () =>
     const [ mockData, setMockData ] = useState(null);
     const [ activeIndex, setActiveIndex ] = useState(0);
     const [ showInstructions, setShowInstructions ] = useState(false);
+    const [ showDropdown, setShowDropdown ] = useState(false);
 
     const getMockData = async () =>
     {
@@ -45,8 +46,8 @@ const Mock = () =>
     }
 
     return(
-        <div className={styles.wrapper}>
-            <Header/>
+        <div className={styles.wrapper} onClick={()=> setShowDropdown(false)}>
+            <Header setShowDropdown={setShowDropdown} showDropdown={showDropdown}/>
             {mockData ? 
             <div className={styles.container}>
                 <div className={styles.questions}>

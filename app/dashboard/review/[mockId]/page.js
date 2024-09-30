@@ -16,6 +16,7 @@ const Review = () =>
 
     const { mockId } = useParams();
     const [ mockData, setMockData ] = useState(null);
+    const [ showDropdown, setShowDropdown ] = useState(false);
     // const [ activeIndex, setActiveIndex ] = useState(0);
 
     const getMockData = async () =>
@@ -31,8 +32,8 @@ const Review = () =>
     },[])
 
     return(
-        <div className={styles.wrapper}>
-            <Header/>
+        <div className={styles.wrapper} onClick={()=> setShowDropdown(false)}>
+            <Header setShowDropdown={setShowDropdown} showDropdown={showDropdown}/>
             {mockData ? 
             <div className={styles.container}>
                 <div className={styles.info}>

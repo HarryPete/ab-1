@@ -2,11 +2,11 @@ import { Feedback } from "@/models/feedback.model";
 
 class feedbackService
 {
-    async addFeedback(user, rating, feedback)
+    async addFeedback(user, rating, feedback, isPay)
     {
         try
         {
-            const newFeedback = await Feedback.create({user, rating, feedback})
+            const newFeedback = await Feedback.create({user, rating, feedback, isPay})
             return await newFeedback.save();
         }
         catch(error)

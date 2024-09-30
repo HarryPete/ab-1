@@ -107,12 +107,12 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             const url = `/api/mock/${mockId}`
             const response = await axios.put(url, {responses: feedback});
             setIsLoading(false)
-            toast.success(response.data.message)
+            toast.success(response.data.message);
             router.push('/dashboard')
         }
         catch(error)
         {
-            enqueueSnackbar(error.message)
+            toast.error(error.message)
             setIsLoading(false)
         }
         
@@ -123,7 +123,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
     {
         e.preventDefault()
         if(!answer)
-            return enqueueSnackbar('Answer cannot be empty') 
+            return toast.error('Answer cannot be empty') 
         
         try
         {      
