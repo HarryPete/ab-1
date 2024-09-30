@@ -5,7 +5,6 @@ const StartMockDialogue = ({setShowInstructions}) =>
 
     return(
         <div className={styles.container}>
-            <p className={styles.title} onClick={()=> router.push('/')}>MockHub</p>
             
             <div className={styles.instructions}>
                 <p className={styles.instruction}>1. Click on the volume icon to listen to the question</p>
@@ -15,7 +14,7 @@ const StartMockDialogue = ({setShowInstructions}) =>
                 <p className={styles.instruction}>5. Once you <strong>Finish</strong> you can review your performance from your dashboard</p>
             </div>
 
-            <button className={styles.webButton}  onClick={()=> setShowInstructions(false)}>Start Mock</button>
+            <button className={styles.webButton}  onClick={()=> setShowInstructions(false)}>Resume Mock</button>
         </div>
         )
 }

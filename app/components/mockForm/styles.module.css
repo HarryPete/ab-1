@@ -34,10 +34,11 @@
 
 .submit, .cancel
 {
-    padding: 7px;
+    padding: 5px 10px;
     border: 1px solid grey;
     color: grey;
     border-radius: 5px;
+    font-size: 14px;
 }
 
 .submit
@@ -79,3 +80,11 @@
     font-weight: 600;
 }
 
+@media screen and (max-width: 480px) 
+{
+    .message
+    {
+        font-size: 16px;
+        text-align: center;
+    }    
+}

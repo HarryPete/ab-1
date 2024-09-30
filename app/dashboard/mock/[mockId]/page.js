@@ -9,8 +9,10 @@ import QuestionPill from '@/app/components/questionPill/QuestionPill';
 import Recording from '@/app/components/recording/Recording';
 import Image from 'next/image';
 import sound from '@/assets/sound.png'
+import info from '@/assets/info.png'
 import StartMockDialogue from '@/app/components/startMockDialogue/StartMockDialogue';
 import { CircularProgress } from '@mui/material';
+
 
 const Mock = () =>
 {
@@ -80,7 +82,7 @@ const Mock = () =>
                     setActiveIndex={setActiveIndex} activeIndex={activeIndex}/>
                     <div></div>
                 </div>
-                <p className={styles.instructions} onClick={()=> setShowInstructions(true)}>Instructions</p>
+                <Image className={styles.instructions} src={info} alt='icon' onClick={()=> setShowInstructions(true)} />
                 {showInstructions && <div className={styles.checkMedia}>
                     <StartMockDialogue setShowInstructions={setShowInstructions}/>
                 </div>}

@@ -64,4 +64,9 @@
     {
         font-size: 20px;
     }    
+
+    .container
+    {
+        padding: 20px;
+    }
 }

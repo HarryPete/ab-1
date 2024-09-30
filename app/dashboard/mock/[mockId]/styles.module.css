@@ -106,18 +106,12 @@
 .instructions
 {
     position: fixed;
-    right: -5px;
+    right: 25px;
     top: 100px;
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: black;
+    height: 20px;
+    width: fit-content;
+    background-color: black;
     cursor: pointer;
-}
-
-.instructions:hover
-{
-    transform: scale(1.05);
 }
 
 @media screen and (max-width:1140px)
@@ -143,8 +137,18 @@
 {
     .container
     {
-        padding: 40px;
+        padding: 40px 20px;
     }    
+
+    .checkMedia
+    {
+        padding: 20px;
+    }
+
+    .instructions
+    {
+        right: 10px;
+    }
 }
 
 
