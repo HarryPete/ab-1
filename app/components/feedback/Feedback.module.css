@@ -40,6 +40,11 @@
     color: black;
 }
 
+.pay, .feedback
+{
+    border: 1px solid rgb(75,75,75);
+}
+
 .pay
 {
     padding: 20px 5px;

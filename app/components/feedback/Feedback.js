@@ -44,7 +44,7 @@ const Feedback = ({setFeedbackForm}) =>
                 We value your feedback to help us improve our offerings 
                 and provide the best possible experience for you.
             </p>
-            <Rating name="simple-controlled" sx={{'& .MuiRating-iconEmpty': { color: 'grey'}}} value={value} onChange={(event, newValue) => {setValue(newValue)}} size="large"/>
+            <Rating name="simple-controlled" sx={{'& .MuiRating-iconEmpty': { color: 'rgb(75,75,75)'}}} value={value} onChange={(event, newValue) => {setValue(newValue)}} size="large"/>
             <Textarea className={styles.feedback} placeholder='Feedback' fullWidth onChange={(e)=> setFeedback(e.target.value)}/>
             <Select className={styles.pay} name="type" onValueChange={(value)=> setIsPay(value)}>
               <SelectTrigger className={styles.pay}>

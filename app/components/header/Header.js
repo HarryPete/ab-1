@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import Feedback from '../feedback/Feedback'
 import Logout from '../logout/Logout'
 import logo from '@/assets/logo.png'
+import fints from '@/assets/fints.png'
 import Image from 'next/image'
 
 const Header = ({showDropdown, setShowDropdown}) =>
@@ -25,11 +26,9 @@ const Header = ({showDropdown, setShowDropdown}) =>
 
     },[])
 
-    console.log(pathname)
-
     return(
         <div className={styles.container}>
-            {pathname !== '/' ? <Image src={logo} className={styles.logo} onClick={()=> router.push('/')}/> : <>.</>}
+            <Image src={pathname === '/' ? fints : logo} className={pathname === '/' ? styles.fints : styles.logo} onClick={()=> router.push('/')}/>
             {status === 'authenticated' ?
             <div className={styles.routes}>
                 <p className={active ? `${styles.nav} ${styles.active}` : styles.nav} onClick={()=> router.push('/dashboard')}>Dashboard</p>

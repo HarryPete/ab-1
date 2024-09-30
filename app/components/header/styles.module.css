@@ -7,11 +7,16 @@
     padding: 30px 25px 10px;
 }
 
-.logo
+.logo,.fints
 {
     height: 35px;
     width: fit-content;
     cursor: pointer;
+}
+
+.fints
+{
+    height: 40px;
 }
 
 .navigation
