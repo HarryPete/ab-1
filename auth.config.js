@@ -2,6 +2,7 @@ import Credentials from "next-auth/providers/credentials"
 import Google from "next-auth/providers/google"
 import userService from "./services/user.service"
 import dbConnect from "./dbConfig/dbConnect";
+import { CredentialsSignin } from "next-auth";
 const userInstance = new userService();
  
 export default { 
@@ -36,18 +37,17 @@ export default {
                     {
                         const user = await userInstance.findByEmail(email)
                         if(!user)
-                            throw new Error('User not found')
+                            throw new CredentialsSignin('User not found')
                         
                         const isMatch = await userInstance.checkPassword(password, user.password);
                         if(!isMatch)
-                            throw new Error('Invalid credentials')
+                            throw new CredentialsSignin('Invalid email or password')
                         return user
                     }   
-                    throw new Error('Invalid credentials')
                 }
                 catch(error)
                 {
-                    throw error
+                    throw new CredentialsSignin(error.mesage || 'Something went wrong')
                 }
             }
         })

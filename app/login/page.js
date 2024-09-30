@@ -5,21 +5,51 @@ import Image from 'next/image';
 import successicon from '../../assets/success-icon.png'
 import erroricon from '../../assets/error-icon.png'
 import { CircularProgress, TextField } from '@mui/material';
-import { redirect, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
 import GoogleAuth from '../components/googleAuth/GoogleAuth';
 import { signIn } from 'next-auth/react';
 import { Input } from '@/components/ui/input';
 import logo from '@/assets/logo.png'
 
+export default function Page() {
+    return (
+      <Suspense fallback={null}>
+        <Login />
+      </Suspense>
+    );
+  }
+
 const Login = () =>
 {   
     const [ errorMessage, setErrorMessage ] = useState('')
-    const [ error, setError ] = useState(false);
+    const [ isError, setError ] = useState(false);
     const [ successMessage, setSuccessMessage ] = useState('')
     const [ success, setSuccess ] = useState(false);
-    const [ isLoading, setIsLoading ] = useState(false)
+    const [ isLoading, setIsLoading ] = useState(false);
+    const searchParams = useSearchParams();
     const router = useRouter();
+    const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
+    const error = searchParams.get('error');
+
+    useEffect(() => 
+    {
+        if (error) 
+        {
+            setError(true)
+            switch (error) 
+            {
+                case "CredentialsSignin":
+                setErrorMessage("Invalid username or password");
+                break;
+                case "Something went wrong!":
+                setErrorMessage("Something went wrong! Please try again.");
+                break;
+                default:
+                setErrorMessage("An unexpected error occurred");
+            }
+        }
+    }, [error]);
 
     const handleSubmit = async (e) =>
     {
@@ -45,22 +75,17 @@ const Login = () =>
 
         setError(false)
         setErrorMessage('');
-        setIsLoading(true);
+        setIsLoading(true)
 
-        try 
+        console.log(formData.get('email'), formData.get('password'));
+
+        signIn('credentials', 
         {
-            await signIn('credentials', {
-                email: formData.get('email'),
-                password: formData.get('password'),
-                callbackUrl: '/dashboard'
-            })
-        } 
-        catch(error) 
-        {
-            setError(true);
-            setErrorMessage(error);
-        }
-        setIsLoading(false)
+            email : formData.get('email'), 
+            password: formData.get('password'),
+            callbackUrl: '/dashboard'
+        })
+        setIsLoading(false);
     }
 
     return(
@@ -74,16 +99,16 @@ const Login = () =>
                     <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.group}>
                         <p className={styles.label}>Email</p>
-                        <Input className={styles.input} type="email" placeholder="admin@mockhub.com" name='role'/>
+                        <Input className={styles.input} type="text" placeholder="admin@mockhub.com" name='email'/>
                     </div>
                     <div className={styles.group}>
                         <p className={styles.label}>Password</p>
-                        <Input className={styles.input} type="text" placeholder='******' name='description' />
+                        <Input className={styles.input} type="text" placeholder='******' name='password' />
                     </div>
 
                         {/* <TextField className={styles.inputs} size='small' color='info' label="Email" type="text" name="email" variant='filled'/>
                         <TextField className={styles.inputs} size='small' color='grey' label="Password" type="password" name="password" variant='filled'/> */}
-                        {error && 
+                        {isError && 
                         <div className={styles.error}>
                             <Image className={styles.erroricon} src={erroricon} alt='error'/>
                             <p className={styles.errorMessage}>{errorMessage}</p>
@@ -107,5 +132,3 @@ const Login = () =>
         </div>
     )
 }
-
-export default Login

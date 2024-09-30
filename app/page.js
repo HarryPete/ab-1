@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Globe from "@/components/ui/globe";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
+import { enqueueSnackbar } from "notistack";
 // import Globe from "@/components/magicui/globe";
 
 export default function Home() 
@@ -19,14 +20,14 @@ export default function Home()
     useEffect(()=>
     {
         const width = divRef.current.offsetWidth;
-        if(width < 420)
-            toast('You seem to be using mobile screen. Use large screens for better experience')
-    },[divRef])
+        if(width < 480)
+            enqueueSnackbar('You seem to be using mobile screen. Use large screen for better experience')
+    },[])
 
     return (
-        <div className={styles.wrapper} ref={divRef}>
+        <div className={styles.wrapper}>
             <Header/>
-            <div>
+            <div ref={divRef}>
                 <div className={styles.globeWrapper}>
                     <span className="pointer-events-none whitespace-pre-wrap bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl font-semibold leading-none text-transparent dark:from-white dark:to-slate-900/10">MockHub</span>
                     <Globe className={styles.globe}/>
