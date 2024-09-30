@@ -1,13 +1,22 @@
 "use client";
 
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
-import { CircularProgress, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import styles from './styles.module.css'
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
+import { Input } from "@/components/ui/input"
+import { Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue, } from "@/components/ui/select";
+import { toast } from "sonner";
+import { CircularProgress } from "@mui/material";
 
 const MockForm = () =>
 {
@@ -18,8 +27,6 @@ const MockForm = () =>
     const [ experience, setExperience] = useState('')
     const [ type, setType ] = useState('')
     const [ questions, setQuestions ] = useState('')
-    const [ error, setError ] = useState(false);
-    const [ errorMessage, setErrorMessage ] = useState('') 
     const { data } = useSession()
     const router = useRouter();
 
@@ -79,36 +86,34 @@ const MockForm = () =>
     {
       const url = `/api/mock/create/${data.user.id}`
       const response = await axios.post(url, {role, description, experience, type, query: queries});
-      enqueueSnackbar(response.data.message);
-      router.push(`/mock/${response.data.mock._id}`)
+      toast.success(response.data.message);
+      router.push(`/dashboard/mock/${response.data.mock._id}`)
     }
     catch(error)
     {
-      console.log(error);
+      throw error;
     }
-    setIsLoading(false);
   }
 
     const handleSubmit = async (e) =>
     {
         e.preventDefault();
 
+        console.log(role, description,experience, type, questions)
+
         if(!role || !description || !experience || !type || !questions)
         {
-          setErrorMessage('All the fields are required*')
-          return setError(true)
+          toast.error('All the fields are required')
+          return 
         }
 
         if(questions<2 )
         {
-          setErrorMessage('Atleast 2 questions are required to generate mock interview')
-          return setError(true)
+          toast.error('Minimum of 2 questions are required to generate mock interview')
+          return 
         }
 
-        setError(false)
-        setErrorMessage('')
         setIsLoading(true);
-        
         try
         {            
           prompt = `Preparing for my upcoming interview for the role ${role} with ${experience} 
@@ -118,34 +123,50 @@ const MockForm = () =>
         }
         catch(error)
         {
-          enqueueSnackbar(error.message);
+          toast.error('Failed to generate mock. Try Again!');
           setIsLoading(false);
         }
     }
 
     return(
         <form onSubmit={handleSubmit} className={styles.form}>
-            <TextField name='role' value={role} onChange={(e)=> setRole(e.target.value)} label='Job Role' placeholder='Ex.Frontend developer'/>
-            <TextField name='description' value={description} onChange={(e)=> setDescription(e.target.value)} label='Job Description' placeholder='Ex.HTML, CSS, Javascript, React'/>
-            <TextField name='experience' value={experience} onChange={(e)=> setExperience(e.target.value)} label='Experience' placeholder='Ex.2'/>
-            <FormControl fullWidth>
-                <InputLabel>Type of questions</InputLabel>
-                <Select name="type" label='Type of questions' value={type} onChange={(e)=> setType(e.target.value)}>
-                    <MenuItem value='Technical'>Technical</MenuItem>
-                    <MenuItem value='Situational'>Situational</MenuItem>
-                    <MenuItem value='Problem-Solving'>Problem solving</MenuItem>
-                    <MenuItem value='Career goals'>Career goals</MenuItem>
-                    <MenuItem value='Leadership'>Leadership</MenuItem>
-                    <MenuItem value='Career goals'>Salary expectation</MenuItem>
-                </Select>
-            </FormControl>
-            <TextField name='questions' value={questions} onChange={(e)=> setQuestions(e.target.value)} label='Numer of questions' placeholder='Minimum 2 questions'/>
-            {error && <p className={styles.error}>{errorMessage}</p>}
+            <div className={styles.group}>
+              <p className={styles.label}>Role</p>
+              <Input className={styles.input} type="text" placeholder="Ex. Frontend Developer" name='role' value={role} onChange={(e)=> setRole(e.target.value)}/>
+            </div>
+            <div className={styles.group}>
+              <p className={styles.label}>Skills</p>
+              <Input className={styles.input} type="text" placeholder='Ex. HTML, CSS, Javascript, React' name='description' value={description} onChange={(e)=> setDescription(e.target.value)}/>
+            </div>
+            <div className={styles.group}>
+              <p className={styles.label}>Experience in years</p>
+              <Input className={styles.input} type="text" name='experience' value={experience} onChange={(e)=> setExperience(e.target.value)}/>
+            </div>
+            <div className={styles.group}>
+              <p className={styles.label}>Type of question</p>
+              <Select className={styles.input} name="type" onValueChange={(value)=> setType(value)}>
+              <SelectTrigger className={styles.input}>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value='Technical'>Technical</SelectItem>
+                <SelectItem value='Situational'>Situational</SelectItem>
+                <SelectItem value='Problem-Solving'>Problem solving</SelectItem>
+                <SelectItem value='Career goals'>Career goals</SelectItem>
+                <SelectItem value='Leadership'>Leadership</SelectItem>
+                <SelectItem value='Salary expectation'>Salary expectation</SelectItem>
+              </SelectContent>
+              </Select>
+            </div>
+            <div className={styles.group}>
+              <p className={styles.label}>No. of questions</p>
+              <Input className={styles.input} type="text" name='role' value={questions} onChange={(e)=> setQuestions(e.target.value)}/>
+            </div>
             <div className={styles.controls}>
               <button className={styles.submit} type="submit">Create mock</button>
               {isLoading && 
               <div className={styles.spinner}>
-                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+                <CircularProgress sx={{color: 'white'}}/>
                 <p className={styles.message}>Creating Personalised Mock Interview</p>
             </div>}
             </div>

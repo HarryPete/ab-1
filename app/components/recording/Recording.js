@@ -13,6 +13,7 @@ import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import { CircularProgress } from '@mui/material';
+import { toast } from 'sonner';
 
 const Recording = ({setActiveIndex, activeIndex, mockData}) =>
 {
@@ -106,7 +107,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             const url = `/api/mock/${mockId}`
             const response = await axios.put(url, {responses: feedback});
             setIsLoading(false)
-            enqueueSnackbar(response.data.message)
+            toast.success(response.data.message)
             router.push('/dashboard')
         }
         catch(error)
@@ -133,7 +134,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         }
         catch(error)
         {
-            enqueueSnackbar(error.message)
+            toast.error(error.message)
         }
     }
 
@@ -141,7 +142,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         <div className={styles.container}>
             <div className={styles.webWrapper}>
             {showWebcam ? 
-                <Webcam onUserMedia={()=> setShowWebam(true)} onUserMediaError={()=> setShowWebam(false)} mirrored={true}/> : <Image className={styles.webcam} src={webcam} alt='webcam'/>}
+                <Webcam className={styles.cam} onUserMedia={()=> setShowWebam(true)} onUserMediaError={()=> setShowWebam(false)} mirrored={true} height={100} width={100}/> : <Image className={styles.webcam} src={webcam} alt='webcam'/>}
                 <button className={styles.webcamButton} 
                     onClick={()=> setShowWebam(!showWebcam)}>
                     {showWebcam ? 'Disable Webcam' : 'Enable Webcam'}
@@ -164,7 +165,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
 
             {isLoading && 
             <div className={styles.spinner}>
-                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+                <CircularProgress sx={{color:"white"}}/>
                 <p className={styles.message}>Analyzing</p>
             </div>}
 

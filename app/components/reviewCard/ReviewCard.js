@@ -8,7 +8,10 @@ const ReviewCard = ({query, response, index}) =>
             <p className={styles.question}><strong>{query.question}</strong></p>
             <p className={styles.rating}>{response[index].rating}/10</p>
             <p className={styles.feedback}>{response[index].feedback}</p>
-            <p className={styles.answer}>{query.answer}</p>
+            
+            <span className={styles.subheader}>Improvised Answer</span>
+            <p className={styles.answer}>    
+            {query.answer}</p>
         </div>
     )
 }

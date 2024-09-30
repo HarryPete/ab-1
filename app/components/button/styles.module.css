@@ -1,0 +1,13 @@
+.container
+{
+    padding: 6px 8px;
+    background-color: white;
+    font-size: 12px;
+    border-radius: 5px;
+    color: black;
+}
+
+.container:hover
+{
+    background-color: rgb(233, 233, 233);
+}

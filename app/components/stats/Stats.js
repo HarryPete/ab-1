@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import axios from 'axios'
+import { Rating } from '@mui/material'
 
 const Stats = () =>
 {
@@ -29,7 +30,7 @@ const Stats = () =>
     {
         const url = '/api/feedback'
         const response = await axios.get(url)
-        const rating  = response.data.reduce((acc, value)=> acc + value.rating, 0);
+        const rating  = response?.data?.reduce((acc, value)=> acc + value.rating, 0);
         setFeedbacks(response.data)
         setRating(rating)
     }
@@ -42,20 +43,23 @@ const Stats = () =>
     },[])
 
     return(
-        <div className={styles.container}>
-            
-                {users && <div className={styles.column}>
+        <div className={styles.wrapper}>
+            {users && mocks && feedbacks &&
+            <div className={styles.container}>
+                <div className={styles.column}>
                     <span className={styles.title}>Active Users</span>
                     <p className={styles.count}>{users.length}</p>
-                </div>}
-                {mocks && <div className={styles.column}>
+                </div>
+                 <div className={styles.column}>
                     <span className={styles.title}>Mocks Generated</span>
                     <p className={styles.count}>{mocks.length}</p>
-                </div>}
-                {feedbacks && <div className={styles.column}>
-                    <span className={styles.title}>Rating</span>
-                    <p className={styles.count}>{Math.round(rating/feedbacks.length)}</p>
-                </div>}
+                </div>
+                <div className={styles.column}>
+                    <Rating value={Math.round(rating/feedbacks.length)} readOnly/>
+                    {/* <span className={styles.title}>Rating</span>
+                    <p className={styles.count}>{Math.round(rating/feedbacks.length)}</p> */}
+                </div>
+            </div>}
         </div>
     )
 }

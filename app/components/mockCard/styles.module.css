@@ -1,12 +1,14 @@
 .container
 {
     width: calc(25% - 12px);
-    border: 1px solid rgb(216, 216, 216);
+    border: 1px solid rgb(75, 75, 75);
     padding: 15px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    row-gap: 5px;
+    row-gap: 10px;
+    font-size: 14px;
+    color: white;
 }
 
 .mock
@@ -14,11 +16,19 @@
     margin: 0;
 }
 
+.header, .container
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
 .footer
 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    column-gap: 5px;
     margin: 20px 0 0;
 }
 
@@ -30,9 +40,9 @@
 
 .review
 {
-    background-color: var(--primary-color);
-    padding: 8px;
-    color: white;
+    background-color: white;
+    padding: 5px;
+    color: black;
     font-size: 12px;
     border-radius: 5px;
     min-width: 60px;
@@ -40,20 +50,18 @@
 
 .review:hover
 {
-    background-color: var(--secondary-color);
-    border-radius: 5px;
+    background-color: rgb(230, 230, 230);
 }
 
 .type
 {
-    background-color: var(--secondary-color);
+    background-color: rgb(75,75,75);
     padding: 2px 5px;
-    border-radius: 5px;
-    color: white;
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-size: 10px;
+    margin: 10px 0;
+    width: fit-content;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-bottom: 10px;
 }
 
 .nav
@@ -80,3 +88,27 @@
     width: fit-content;
 }
 
+
+@media screen and (max-width: 1220px) 
+{
+    .container
+    {
+        width: calc(33.4% - 12px);
+    }    
+}
+
+@media screen and (max-width: 1120px) 
+{
+    .container
+    {
+        width: calc(50% - 10px);
+    }    
+}
+
+@media screen and (max-width: 720px) 
+{
+    .container
+    {
+        width: 100%;
+    }    
+}

@@ -15,6 +15,11 @@ const feedbackSchema = new Schema({
     {
         type: String, 
         required: true
+    },
+    isPay:
+    {
+        type: String,
+        required: true
     }
 },
 {

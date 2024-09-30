@@ -4,23 +4,34 @@
 
 :root
 {
-  --primary-color: rgb(0, 54, 116);
+  --primary-color: rgb(72, 18, 143);
   --secondary-color: rgb(0, 177, 94);
   --success-bg: rgb(241, 251, 234);
   --warning-bg: rgb(255, 255, 178);
 }
 
+.main
+{
+  background-color: black;
+}
+
 ::-webkit-scrollbar 
 {
-  width: 5px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track 
 {
-  background: rgb(231, 231, 231);
+  background: rgb(0, 0, 0);
 }
 
 ::-webkit-scrollbar-thumb 
 {
-  background: rgb(116, 116, 116);
+  background: rgb(73, 73, 73);
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }

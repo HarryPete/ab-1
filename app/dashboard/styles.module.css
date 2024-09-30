@@ -3,24 +3,30 @@
     padding: 30px 10vw;
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 30px;
     font-size: 15px;
+}
+
+.container
+{
+    font-size: 14px;
 }
 
 .greet
 {
-    font-size: 40px;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.user
-{
-    color: var(--secondary-color);
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    word-spacing: 3px;
+    color: white;
+    padding: 10px;
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgba(85, 85, 85, 0.39), rgb(0, 0, 0) 100%);
+    border-radius: 5px;
 }
 
 .mockCards
 {
+    row-gap: 20px;
     padding: 0;
 }
 
@@ -35,9 +41,9 @@
 .mockTitle
 {
     margin-top: 25px;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--primary-color);
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
 }
 
 .spinner

@@ -2,19 +2,39 @@
 {
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
+    row-gap: 20px;
+}
+
+.input
+{
+    width: 100%;
+    padding: 20px;
+    border: 1px solid rgb(75, 75, 75);
+    color: white;
 }
 
 .controls
 {
     display: flex;
-    justify-content: end;
+    justify-content: start;
     column-gap: 10px;
+}
+
+.group
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.label
+{
+    color: white;
 }
 
 .submit, .cancel
 {
-    padding: 8px;
+    padding: 7px;
     border: 1px solid grey;
     color: grey;
     border-radius: 5px;
@@ -22,16 +42,12 @@
 
 .submit
 {
-    border: 1px solid var(--primary-color);
-    background-color: var(--primary-color);
-    color: white;
+    background-color: white;
 }
 
 .submit:hover
 {
-    border: 1px solid var(--secondary-color);
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: rgb(247, 247, 247);
 }
 
 .spinner
@@ -46,14 +62,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: 10px;
+    row-gap: 20px;
     z-index: 10;
 }
 
 .message
 {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 500;
     color: white;
 }
 

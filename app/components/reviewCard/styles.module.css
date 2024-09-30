@@ -6,14 +6,27 @@
     row-gap: 5px;
 }
 
-.feedback, .answer
+.answer
 {
-    background-color: var(--warning-bg);
     padding: 10px;
     border-radius: 5px;
 }
 
+.feedback
+{
+    padding: 10px 0;
+}
+
 .answer
 {
-    background-color: var(--success-bg);
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.subheader
+{
+    color: grey;
 }

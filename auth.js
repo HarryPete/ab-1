@@ -20,8 +20,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
                     const isUserFound = await userInstance
                     .findByEmail(email);
 
-                    console.log(name, email, id)
-
                     if(!isUserFound)
                         await userInstance.googleAuth(name, email, id);
 
@@ -43,9 +41,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
             {
                 await dbConnect();
                 const isUserFound = await userInstance.findByEmail(token.email);
-                if(!isUserFound)
-                    token.role = 'visitor'
-                else
+                if(isUserFound)
                 {
                     token.id = isUserFound._id
                     token.role = isUserFound.role

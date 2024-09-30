@@ -85,7 +85,7 @@ const Mock = () =>
                 </div>}
             </div> :
             <div className={styles.spinner}>
-                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+                <CircularProgress sx={{color:"rgb(255, 255, 255)"}}/>
             </div>}
         </div>
     )

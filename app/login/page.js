@@ -7,9 +7,10 @@ import erroricon from '../../assets/error-icon.png'
 import { CircularProgress, TextField } from '@mui/material';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Header from '../components/header/Header';
 import GoogleAuth from '../components/googleAuth/GoogleAuth';
-import { credentialLogin } from '../action';
+import { signIn } from 'next-auth/react';
+import { Input } from '@/components/ui/input';
+import logo from '@/assets/logo.png'
 
 const Login = () =>
 {   
@@ -48,9 +49,11 @@ const Login = () =>
 
         try 
         {
-            await credentialLogin(formData);
-            setError(true);
-            setErrorMessage(response);
+            await signIn('credentials', {
+                email: formData.get('email'),
+                password: formData.get('password'),
+                callbackUrl: '/dashboard'
+            })
         } 
         catch(error) 
         {
@@ -65,13 +68,21 @@ const Login = () =>
             {/* <Header/> */}
            <div className={styles.container}> 
                 <div className={styles.header}>
-                    <p className={styles.title} onClick={()=> router.push('/')}><span className={styles.mock}>Mock</span> Hub</p>
-                    <p className={styles.welcome}>Welcome back!</p>
+                    <Image src={logo} className={styles.title} onClick={()=> router.push('/')}/>
                 </div>
                 <div className={styles.form}>
                     <form className={styles.form} onSubmit={handleSubmit}>
-                        <TextField className={styles.inputs} size='small' color='grey' label="Email" type="text" name="email" variant='filled'/>
-                        <TextField className={styles.inputs} size='small' color='grey' label="Password" type="password" name="password" variant='filled'/>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Email</p>
+                        <Input className={styles.input} type="email" placeholder="admin@mockhub.com" name='role'/>
+                    </div>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Password</p>
+                        <Input className={styles.input} type="text" placeholder='******' name='description' />
+                    </div>
+
+                        {/* <TextField className={styles.inputs} size='small' color='info' label="Email" type="text" name="email" variant='filled'/>
+                        <TextField className={styles.inputs} size='small' color='grey' label="Password" type="password" name="password" variant='filled'/> */}
                         {error && 
                         <div className={styles.error}>
                             <Image className={styles.erroricon} src={erroricon} alt='error'/>

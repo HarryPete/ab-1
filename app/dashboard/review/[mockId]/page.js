@@ -42,7 +42,7 @@ const Review = () =>
                         <p><strong>Experience: </strong>{mockData.experience} years</p>
                         <p><strong>Category: </strong>{mockData.type}</p>                 
                     </div>
-                    <ColorCard/>
+                    {/* <ColorCard/> */}
                 </div>
                 <div className={styles.review}>
                 <p className={styles.date}>{FormatDate(mockData.updatedAt)}</p> 
@@ -56,7 +56,7 @@ const Review = () =>
                 </div> */}
             </div>:
             <div className={styles.spinner}>
-                <CircularProgress sx={{color:"rgb(0, 177, 94)"}}/>
+                <CircularProgress sx={{color:"rgb(255, 255, 255)"}}/>
             </div>}   
         </div>
     )

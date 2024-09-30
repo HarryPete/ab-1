@@ -3,6 +3,7 @@ import "./globals.css";
 import SessionWrapper from "./SessionWrappper";
 import ReduxProvider from "./ReduxProvider";
 import SnackbarProviderWrapper from "./SnackbarProviderWrapper";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,12 @@ export default function RootLayout({ children }) {
       <SessionWrapper>
         <SnackbarProviderWrapper>
         <ReduxProvider>
-          <body className={inter.className}>{children}</body>
+          <body className='main'>
+          <main className={inter.className}>
+            {children}
+            <Toaster toastOptions={{ style: {color:"white", padding: '20px', border: '1px solid rgb(75,75,75)', backgroundColor: 'black'}}}/>
+            </main>
+          </body>
         </ReduxProvider>
         </SnackbarProviderWrapper>
       </SessionWrapper>

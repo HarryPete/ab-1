@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import mockTest from  '@/assets/mock.png' 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import Button from '../button/Button'
 
 const MockCard = ({mock}) =>
 {
@@ -10,18 +11,17 @@ const MockCard = ({mock}) =>
 
     return(
         <div className={styles.container}>
-            <div className={styles.mockWrapper}>
-                <Image className={styles.mockIcon} src={mockTest} alt='mock'/>
-                <p className={styles.type}>{mock.type}</p>
+            <div className={styles.header}>
+                <p className={styles.mock}><strong>Role</strong> / {mock.role}</p>
+                <p className={styles.mock}><strong>Skills</strong> / {mock.description}</p>
+                <p className={styles.mock}>{mock.query.length} questions</p>
             </div>
-            <p className={styles.mock}><strong>Role</strong> / {mock.role}</p>
-            <p className={styles.mock}><strong>Description</strong> / {mock.description}</p>
-            <p className={styles.mock}>{mock.query.length} questions</p>
+            <p className={styles.type}>{mock.type}</p>
             <div className={styles.footer}>
-                <p className={styles.date}>{FormatDate(mock.createdAt)}</p>
+                <p className={styles.date}>{FormatDate(mock.createdAt).split(',')[0]}</p>
                 <div className={styles.nav}>
-                    <button className={styles.review} onClick={()=> router.push(`/mock/${mock._id}`)}>{mock.response.length ? 'Retake' : 'Start'}</button>
-                    {mock.response.length > 0 && <button className={styles.review} onClick={()=> router.push(`/review/${mock._id}`)}>Review</button>}
+                    <Button text={mock.response.length ? 'Retake' : 'Start'} route={`/dashboard/mock/${mock._id}`}/>
+                    {mock.response.length > 0 && <Button text='Review' route={`/dashboard/review/${mock._id}`}/>}
                 </div>
             </div>
         </div>

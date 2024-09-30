@@ -1,15 +1,6 @@
 .logout
 {
-    padding: 2px 10px;
-    border: 1px solid var(--primary-color);
-    background-color: var(--primary-color);
-    color: white;
-    border-radius: 5px;
-}
-
-.logout:hover
-{
-    background-color: var(--secondary-color);
-    border: 1px solid var(--secondary-color);
-    color: white;
+    height: 30px;
+    width: fit-content;
+    cursor: pointer;
 }

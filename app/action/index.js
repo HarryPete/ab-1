@@ -2,6 +2,7 @@
 
 import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
+import { redirect } from "next/navigation";
 
 export async function doLogout() 
 {
@@ -21,7 +22,7 @@ export async function credentialLogin(formData)
         {
             email: formData.get("email"),
             password: formData.get("password"),
-            redirectTo: '/dashboard',
+            redirectTo: '/login'
         });
     } 
     catch (error) 

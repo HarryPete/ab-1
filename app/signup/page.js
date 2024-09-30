@@ -9,8 +9,9 @@ import { CircularProgress, TextField } from '@mui/material';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Header from '../components/header/Header';
+import logo from '@/assets/logo.png'
 import GoogleAuth from '../components/googleAuth/GoogleAuth';
+import { Input } from '@/components/ui/input';
 
 const Signup = () =>
 {   
@@ -98,13 +99,26 @@ const Signup = () =>
             {/* <Header/> */}
            <div className={styles.container}> 
                 <div className={styles.header}>
-                    <p className={styles.title} onClick={()=> router.push('/')}><span className={styles.mock}>Mock</span> Hub</p>
+                    <Image src={logo} className={styles.title} onClick={()=> router.push('/')}/>
                 </div>
                 <div className={styles.form}>
                     <form className={styles.form} onSubmit={handleSubmit}>
-                        <TextField className={styles.inputs} size='small' color='grey' label="Name" type="text" name="name" variant='filled' />
+                    <div className={styles.group}>
+                        <p className={styles.label}>Name</p>
+                        <Input className={styles.input} type="text" placeholder="MockHub" name='name' />
+                    </div>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Email</p>
+                        <Input className={styles.input} type="email" placeholder="admin@mockhub.com" name='email'/>
+                    </div>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Password</p>
+                        <Input className={styles.input} type="text" placeholder='******' name='password' />
+                    </div>
+                    
+                        {/* <TextField className={styles.inputs} size='small' color='grey' label="Name" type="text" name="name" variant='filled' />
                         <TextField className={styles.inputs} size='small' color='grey' label="Email" type="text" name="email" variant='filled' />
-                        <TextField className={styles.inputs} size='small' color='grey' label="Password" type="text" name="password" variant='filled' />
+                        <TextField className={styles.inputs} size='small' color='grey' label="Password" type="text" name="password" variant='filled' /> */}
                         {error && 
                         <div className={styles.error}>
                             <Image className={styles.erroricon} src={erroricon} alt='error'/>

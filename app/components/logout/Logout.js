@@ -1,11 +1,14 @@
-import { doLogout } from "@/app/action"
+
+import Image from 'next/image'
 import styles from './styles.module.css' 
+import { signOut } from "next-auth/react"
+import logout from '@/assets/logout.png'
 
 const Logout = () => {
   return (
-    <form action={doLogout}>
-        <button className={styles.logout} type="submit">Logout</button>
-    </form>
+    <div>
+        <Image src={logout} alt='mockhub' className={styles.logout} onClick={()=> signOut({callbackUrl: '/'})}/>
+    </div>
   )
 }
 
