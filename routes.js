@@ -3,9 +3,9 @@ export const userRoutes =
     '/dashboard', '/mock', '/review'
 ] 
 
-export const adminRoutes =
+export const protectedRoutes =
 [
-    '/admin'
+    '/api'
 ] 
 
 export const authRoutes =
