@@ -135,7 +135,7 @@ const MockForm = () =>
             </div>
             <div className={styles.group}>
               <p className={styles.label}>Skills</p>
-              <Input className={styles.input} type="text" placeholder='Ex. Investigating transactions, Periodc reviews, SAR/STR filing' name='description' value={description} onChange={(e)=> setDescription(e.target.value)}/>
+              <Input className={styles.input} type="text" placeholder='Ex. Investigating transactions, Periodic reviews, SAR/STR filing' name='description' value={description} onChange={(e)=> setDescription(e.target.value)}/>
             </div>
             <div className={styles.group}>
               <p className={styles.label}>Experience in years</p>

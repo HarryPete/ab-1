@@ -48,7 +48,7 @@ export default function Home()
 
         if (currentHour < 12) 
             setGreeting('Good Morning');
-        else if (currentHour < 18) 
+        else if (currentHour < 16) 
             setGreeting('Good Afternoon');
         else 
             setGreeting('Good Evening');

@@ -19,32 +19,31 @@ import CarouselCard from "./components/carouselCard/CarouselCard";
 export default function Home() 
 {
     const divRef = useRef();
-    const [ feedbacks, setFeedbacks ] = useState(null)
+    // const [ feedbacks, setFeedbacks ] = useState(null)
 
-    const getFeedbacks = async ()=>
-    {
-        try
-        {
-            const url = '/api/feedback';
-            const response = await axios.get(url);
-            setFeedbacks(response.data);
-        }
-        catch(error)
-        {
-            toast.error(error.message)
-        }
-    }
+    // const getFeedbacks = async ()=>
+    // {
+    //     try
+    //     {
+    //         const url = '/api/feedback';
+    //         const response = await axios.get(url);
+    //         setFeedbacks(response.data);
+    //     }
+    //     catch(error)
+    //     {
+    //         toast.error(error.message)
+    //     }
+    // }
 
     useEffect(()=>
     {
-        getFeedbacks();
+        // getFeedbacks();
 
         const width = divRef.current.offsetWidth;
         if(width < 480)
             enqueueSnackbar('You seem to be using mobile screen. Use large screen for better experience')
     },[])
 
-    console.log(feedbacks);
 
     return (
         <div className={styles.wrapper}>
@@ -56,20 +55,18 @@ export default function Home()
                     <div className="pointer-events-none inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
                 </div>
                 <div className={styles.content}>
-                    {/* <p className={styles.header}>Get Interview Ready <span className={styles.active}>Anytime</span></p> */}
                     <Stats/>
-                    {/* <button className={styles.route} onClick={()=> router.push('/dashboard')}>Get Started</button> */}
                 </div>   
             </div>
-           {feedbacks && 
-           <div className={styles.feedbacks}>
-                {/* <Marquee pauseOnHover vertical className="[--duration:20s]">
+          
+           {/* <div className={styles.feedbacks}>
+                <Marquee pauseOnHover vertical className="[--duration:20s]">
                     {feedbacks.map((feedback)=>
                     (
                         <CarouselCard feedback={feedback} key={feedback._id}/>
                     ))}
-                </Marquee> */}
-            </div>}
+                </Marquee>
+            </div> */}
 
             <Footer/>
         </div>

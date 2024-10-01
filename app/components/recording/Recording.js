@@ -22,7 +22,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         startSpeechToText, stopSpeechToText } = 
         useSpeechToText({ continuous: true, useLegacyResults: false });
     const [ showWebcam, setShowWebam ] = useState(false);
-    const [ answer,  setAnswer ] = useState(null);
+    const [ answer, setAnswer ] = useState(null);
     const disptach = useDispatch();
     const responses = useSelector((state)=> state.mockResponse.response);
     const [ isLoading, setIsLoading ] = useState(false);
@@ -90,13 +90,13 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
     const endIndex = query.lastIndexOf("}") + 1; 
     const response = JSON.parse(query.slice(startIndex, endIndex));
     
-
     if(activeIndex+1 < mockData.query.length)
     {
         disptach(addResponse(response));
         setIsLoading(false)
         setActiveIndex((prev)=> prev+1)
         setResults([]);
+        setAnswer(null);
     }     
     else
     {
@@ -108,7 +108,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             const response = await axios.put(url, {responses: feedback});
             setIsLoading(false)
             toast.success(response.data.message);
-            router.push('/dashboard')
+            router.push(`/dashboard/review/${mockId}`)
         }
         catch(error)
         {
@@ -121,7 +121,8 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
 
     const handleSubmit = async (e) =>
     {
-        e.preventDefault()
+        e.preventDefault();
+        stopSpeechToText();
         if(!answer)
             return toast.error('Answer cannot be empty') 
         
@@ -130,7 +131,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             setIsLoading(true)      
             prompt = `For the given interview question ${mockData.query[activeIndex].question} rate this answer ${answer} on scale of 10
             and feedback in 3-4 lines, return in JSON with fields rating and feedback`
-            runChat(prompt)
+            runChat(prompt);
         }
         catch(error)
         {
@@ -152,7 +153,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             <div className={styles.record}>
 
                 {answer && 
-                <button className={styles.webButton} onClick={()=> {setResults([]); setAnswer(null)}}>
+                <button className={styles.webButton} onClick={()=> {stopSpeechToText(); setResults([]); setAnswer(null);}}>
                     Clear Answer
                 </button>}
 
@@ -166,7 +167,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             {isLoading && 
             <div className={styles.spinner}>
                 <CircularProgress sx={{color:"white"}}/>
-                <p className={styles.message}>Analyzing</p>
+                <p className={styles.message}>{activeIndex+1 === mockData.query.length ? 'Generating Detailed Review' : 'Analyzing'}</p>
             </div>}
 
             <ul className={styles.answer}>

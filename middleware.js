@@ -10,7 +10,7 @@ export default async function auth(req)
     const cookie = cookies()?.get('__Secure-authjs.session-token');
     // const cookie = cookies()?.get('authjs.session-token');
     
-    let user=null;
+    let user = null;
     if(cookie)
     {
         user = await decode({
@@ -21,9 +21,9 @@ export default async function auth(req)
     } 
 
     const userRoute = userRoutes.some((route)=> nextUrl.pathname.startsWith(route));
-    // const adminRoute = protectedRoutes.some((route)=> nextUrl.pathname.startsWith(route));
+    // const adminRoute = protectedRoutes.some((route)=> nextUrl.pathname ===  route);
     const authRoute = authRoutes.some((route)=> nextUrl.pathname.startsWith(route));
-       
+
     if(!user && userRoute)
         return NextResponse.redirect(new URL('/login', nextUrl))
 

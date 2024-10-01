@@ -63,7 +63,7 @@ class userService
     {
         try
         {
-            const user = await User.find({}); 
+            const user = await User.find().select('-password -googleId -email -role -_id').populate({path: 'mocks', model: Mock}); 
             return user;
         }
         catch(error)
