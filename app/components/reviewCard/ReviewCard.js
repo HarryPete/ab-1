@@ -18,8 +18,7 @@ const ReviewCard = ({query, result, index, activeIndex, setActiveIndex}) =>
             <p className={styles.userAnswer}>{result[index].answer}</p>
             
             <span className={styles.subheader}>Improvised Answer</span>
-            <p className={styles.answer}>    
-            {formattedResponse}</p>
+            <p className={styles.answer} dangerouslySetInnerHTML={{ __html: formattedResponse }} />
             {activeIndex === index &&
             <div className={styles.feed}>
                 <p className={styles.aiFeedback}>{result[activeIndex].response.feedback}<span onClick={()=> setActiveIndex(-1)} className={styles.close}>X</span></p>
