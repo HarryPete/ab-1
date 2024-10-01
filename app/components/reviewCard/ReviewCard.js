@@ -7,6 +7,7 @@ const ReviewCard = ({query, result, index, activeIndex, setActiveIndex}) =>
 {
     const {data} = useSession();
     const user = data?.user?.name;
+    const formattedResponse = query.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
     return(
         <div className={styles.container}>
@@ -18,7 +19,7 @@ const ReviewCard = ({query, result, index, activeIndex, setActiveIndex}) =>
             
             <span className={styles.subheader}>Improvised Answer</span>
             <p className={styles.answer}>    
-            {query.answer}</p>
+            {formattedResponse}</p>
             {activeIndex === index &&
             <div className={styles.feed}>
                 <p className={styles.aiFeedback}>{result[activeIndex].response.feedback}<span onClick={()=> setActiveIndex(-1)} className={styles.close}>X</span></p>
