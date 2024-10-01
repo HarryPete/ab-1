@@ -10,6 +10,7 @@ import MockForm from "../components/mockForm/MockForm";
 import MockCard from "../components/mockCard/MockCard";
 import { CircularProgress } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
+import { toast } from "sonner";
 
 export default function Home() 
 {
@@ -33,14 +34,15 @@ export default function Home()
             {
                 const reviewMocks = response.data.mocks.filter((mock)=> mock.result.length)
                 const draftMocks = response.data.mocks.filter((mock)=> !mock.result.length)
+                const drafts = draftMocks?.length === 0 ? null : draftMocks
                 setReviewMocks(reviewMocks);
-                setDraftMocks(draftMocks);   
+                setDraftMocks(drafts);   
             }
             setIsLoading(false)
         }
         catch(error)
         {
-            enqueueSnackbar(error.message)
+            toast.error(error.message)
             setIsLoading(false)
         }
     }

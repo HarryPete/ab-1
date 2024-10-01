@@ -27,6 +27,8 @@ const Review = () =>
         setMockData(response.data)
     }
 
+    console.log(mockData)
+
     useEffect(()=>
     {
         getMockData();

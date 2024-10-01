@@ -7,7 +7,7 @@ const ReviewCard = ({query, result, index, activeIndex, setActiveIndex}) =>
 {
     const {data} = useSession();
     const user = data?.user?.name;
-    const formattedResponse = query.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    const formattedResponse = query.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*\*/g, '');
 
     return(
         <div className={styles.container}>
