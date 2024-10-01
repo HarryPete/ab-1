@@ -117,7 +117,7 @@ const MockForm = () =>
         {            
           prompt = `Preparing for my upcoming interview for the role ${role} with ${experience} 
           years of experience, with the skillsets ${description}. Provide ${questions} ${type} 
-          questions and answers in JSON format with fields question and answer`
+          questions and answers in short 4-5 lines in JSON format with fields question and answer`
           runChat(prompt)
         }
         catch(error)

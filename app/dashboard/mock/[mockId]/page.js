@@ -61,7 +61,7 @@ const Mock = () =>
                             <QuestionPill key={index} index={index} activeIndex={activeIndex}/>
                         ))}
                         </div>
-                        <p className={styles.question}>{mockData.assessment[activeIndex].question}</p>
+                        <p className={styles.question}>{mockData.assessment[activeIndex].question +"(Answer in 4-5 lines)"} </p>
                         <Image className={styles.sound} src={sound} alt='sound' onClick={()=> handleTextToSpeech()}/>
                     </div>
                     <div className={styles.footer}>

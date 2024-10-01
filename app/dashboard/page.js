@@ -29,10 +29,13 @@ export default function Home()
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
             setUserData(response.data)
-            const reviewMocks = response.data.mocks.filter((mock)=> mock.result.length)
-            const draftMocks = response.data.mocks.filter((mock)=> !mock.result.length)
-            setReviewMocks(reviewMocks);
-            setDraftMocks(draftMocks);   
+            if(response.data?.mocks?.length)
+            {
+                const reviewMocks = response.data.mocks.filter((mock)=> mock.result.length)
+                const draftMocks = response.data.mocks.filter((mock)=> !mock.result.length)
+                setReviewMocks(reviewMocks);
+                setDraftMocks(draftMocks);   
+            }
             setIsLoading(false)
         }
         catch(error)
@@ -66,30 +69,30 @@ export default function Home()
             <div className={styles.spinner}>
                 <CircularProgress sx={{color:"rgb(255, 255, 255)"}}/>
             </div> :
-            <div className={styles.container}>
-                {userData && <p className={styles.greet}>{greeting}<span className={styles.user}> {userData.name.split(' ')[0]}</span></p>}
+            (userData ? <div className={styles.container}>
+               <p className={styles.greet}>{greeting}<span className={styles.user}> {userData.name.split(' ')[0]}</span></p>
                 <MockForm/>
-                {draftMocks?.length ?
+                {draftMocks &&
                 <div className={styles.mockCards}>
                     <p className={styles.mockTitle}>Drafts</p>
                     <div className={styles.mocks}>
-                    {userData.mocks.map((mock)=>
+                    {draftMocks.map((mock)=>
                     (
                         <MockCard mock={mock}/>
-                    )).filter((mock)=> !mock.props.mock.result.length)}
+                    ))}
                     </div>
-                </div>: <></>}
-                {reviewMocks?.length ?
+                </div>}
+                {reviewMocks &&
                 <div className={styles.mockCards}>
                     <p className={styles.mockTitle}>Review Mocks</p>
                     <div className={styles.mocks}>
-                    {userData.mocks.map((mock)=>
+                    {reviewMocks.map((mock)=>
                     (
                         <MockCard mock={mock}/>
-                    )).filter((mock)=> mock.props.mock.result.length)}
+                    ))}
                     </div>
-                </div>: <></>}
-            </div>}
+                </div>}
+            </div>: <></>)}
         </div>
   );
 }

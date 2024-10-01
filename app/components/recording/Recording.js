@@ -8,7 +8,7 @@ import Image from 'next/image';
 import useSpeechToText from 'react-hook-speech-to-text';
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
 import { useDispatch, useSelector } from 'react-redux';
-import { addResponse } from '@/store/slices/mockReducer';
+import { addResponse, resetResponse } from '@/store/slices/mockReducer';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { enqueueSnackbar } from 'notistack';
@@ -29,6 +29,8 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
     const {mockId} = useParams();
     const router = useRouter();
 
+    console.log(responses);
+
     useEffect(()=>
     {
         {results && results.map((result)=>
@@ -37,8 +39,6 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         })}
 
     },[results])
-
-    console.log(responses);
 
     async function runChat(prompt) 
     {
@@ -108,7 +108,8 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         {
             const url = `/api/mock/${mockId}`
             const response = await axios.put(url, {result: feedback});
-            setIsLoading(false)
+            setIsLoading(false);
+            disptach(resetResponse());
             toast.success(response.data.message);
             router.push(`/dashboard/review/${mockId}`)
         }
@@ -117,7 +118,6 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
             toast.error(error.message)
             setIsLoading(false)
         }
-        
     }
     }
 
@@ -131,8 +131,8 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         try
         {      
             setIsLoading(true)      
-            prompt = `For the given interview question ${mockData.assessment[activeIndex].question} rate this answer ${answer} on scale of 10
-            and feedback in 3-4 lines, return in JSON with fields rating and feedback`
+            prompt = `Compare your answer ${mockData.assessment[activeIndex].answer} with mine ${answer}, rate my answer on scale of 10
+            and feedback in 1-2 lines, return in JSON with fields rating and feedback`
             runChat(prompt);
         }
         catch(error)

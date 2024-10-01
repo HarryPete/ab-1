@@ -17,9 +17,14 @@ const slice = createSlice({
         addResponse(state, action)
         {
             state.result.push(action.payload)
+        },
+
+        resetResponse(state, action)
+        {
+            state.result = [];
         }
     }
 })
 
-export const {addResponse, updateResponse} = slice.actions
+export const {addResponse, updateResponse, resetResponse} = slice.actions
 export default slice.reducer

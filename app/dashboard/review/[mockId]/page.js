@@ -10,6 +10,7 @@ import ReviewCard from '@/app/components/reviewCard/ReviewCard';
 import { FormatDate } from '@/utils/FormatDate';
 import ColorCard from '@/app/components/colorCard/ColorCard';
 import { CircularProgress } from '@mui/material';
+import { toast } from 'sonner';
 
 const Review = () =>
 {
@@ -25,8 +26,6 @@ const Review = () =>
         const response = await axios.get(url);
         setMockData(response.data)
     }
-
-    console.log(mockData)
 
     useEffect(()=>
     {
@@ -51,7 +50,7 @@ const Review = () =>
                 <p className={styles.date}>{FormatDate(mockData.updatedAt)}</p> 
                 {mockData.assessment.map((query,index)=>
                 (
-                    <ReviewCard query={query} result={mockData.result} index={index} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
+                    <ReviewCard query={query} result={mockData.result} index={index} activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
                 ))}
                 </div>
                 {/* <div className={styles.footer}>

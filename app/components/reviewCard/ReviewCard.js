@@ -1,10 +1,12 @@
 import { useSession } from 'next-auth/react'
 import styles from './styles.module.css'
+import Image from 'next/image';
+import sound from '@/assets/sound.png'
 
 const ReviewCard = ({query, result, index, activeIndex, setActiveIndex}) =>
 {
     const {data} = useSession();
-    const user = data.user.name
+    const user = data?.user?.name;
 
     return(
         <div className={styles.container}>
@@ -13,6 +15,7 @@ const ReviewCard = ({query, result, index, activeIndex, setActiveIndex}) =>
             <p className={styles.rating}>{result[index].response.rating}/10</p>
             <span className={styles.subheader}>{user}'s Answer</span>
             <p className={styles.userAnswer}>{result[index].answer}</p>
+            
             <span className={styles.subheader}>Improvised Answer</span>
             <p className={styles.answer}>    
             {query.answer}</p>
