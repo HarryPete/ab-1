@@ -84,7 +84,7 @@ const MockForm = () =>
     try
     {
       const url = `/api/mock/create/${data.user.id}`
-      const response = await axios.post(url, {role, description, experience, type, query: queries});
+      const response = await axios.post(url, {role, description, experience, type, assessment: queries});
       toast.success(response.data.message);
       router.push(`/dashboard/mock/${response.data.mock._id}`)
     }

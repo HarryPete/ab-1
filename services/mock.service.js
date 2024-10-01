@@ -2,11 +2,11 @@ const { Mock } = require("@/models/mock.model")
 
 class mockService
 {
-    async createMock(role, description, experience, type, query)
+    async createMock(role, description, experience, type, assessment)
     {
         try
         {
-            const mock = await Mock.create({role, description, experience, type, query})
+            const mock = await Mock.create({role, description, experience, type, assessment})
             await mock.save();
             return mock;
         }
@@ -42,11 +42,11 @@ class mockService
         }
     }
 
-    async updateResponses(mockId, response)
+    async updateResponses(mockId, result)
     {
         try
         {
-            return await Mock.findByIdAndUpdate(mockId, {$set: {response}})
+            return await Mock.findByIdAndUpdate(mockId, {$set: {result}})
         }
         catch(error)
         {

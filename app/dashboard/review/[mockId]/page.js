@@ -17,7 +17,7 @@ const Review = () =>
     const { mockId } = useParams();
     const [ mockData, setMockData ] = useState(null);
     const [ showDropdown, setShowDropdown ] = useState(false);
-    // const [ activeIndex, setActiveIndex ] = useState(0);
+    const [ activeIndex, setActiveIndex ] = useState(-1);
 
     const getMockData = async () =>
     {
@@ -49,9 +49,9 @@ const Review = () =>
                 </div>
                 <div className={styles.review}>
                 <p className={styles.date}>{FormatDate(mockData.updatedAt)}</p> 
-                {mockData.query.map((question,index)=>
+                {mockData.assessment.map((query,index)=>
                 (
-                    <ReviewCard query={question} response={mockData.response} index={index} />
+                    <ReviewCard query={query} result={mockData.result} index={index} activeIndex={activeIndex} setActiveIndex={setActiveIndex}/>
                 ))}
                 </div>
                 {/* <div className={styles.footer}>

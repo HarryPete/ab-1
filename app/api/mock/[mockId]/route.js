@@ -10,8 +10,8 @@ export async function PUT(req, {params})
     try
     {
         await dbConnect();
-        const { responses }  =await req.json();
-        const mock = await mockInstance.updateResponses(mockId, responses);
+        const { result }  =await req.json();
+        await mockInstance.updateResponses(mockId, result);
         return NextResponse.json({message: 'Submitted successfully'});
     }
     catch(error)

@@ -21,11 +21,11 @@ const mockSchema = new Schema({
         type: String, 
         required: true
     },
-    query:
+    assessment:
     {
         type: [Schema.Types.Mixed]
     },
-    response:
+    result:
     {
         type: [Schema.Types.Mixed]
     },

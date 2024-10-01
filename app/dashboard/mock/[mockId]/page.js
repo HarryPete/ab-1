@@ -39,7 +39,7 @@ const Mock = () =>
     {
         if('speechSynthesis' in window)
         {
-            const speech = new SpeechSynthesisUtterance(mockData.query[activeIndex].question);
+            const speech = new SpeechSynthesisUtterance(mockData.assessment[activeIndex].question);
             window.speechSynthesis.speak(speech)
         }
         else
@@ -56,12 +56,12 @@ const Mock = () =>
                     <div className={styles.header}>
                         {/* <p>{activeIndex+1}/{mockData.query.length}</p> */}
                         <div className={styles.questionPills}>
-                        {mockData.query.map((_, index)=>
+                        {mockData.assessment.map((_, index)=>
                         (
                             <QuestionPill key={index} index={index} activeIndex={activeIndex}/>
                         ))}
                         </div>
-                        <p className={styles.question}>{mockData.query[activeIndex].question}</p>
+                        <p className={styles.question}>{mockData.assessment[activeIndex].question}</p>
                         <Image className={styles.sound} src={sound} alt='sound' onClick={()=> handleTextToSpeech()}/>
                     </div>
                     <div className={styles.footer}>

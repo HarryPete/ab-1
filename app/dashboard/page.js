@@ -29,8 +29,8 @@ export default function Home()
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
             setUserData(response.data)
-            const reviewMocks = response.data.mocks.filter((mock)=> mock.response.length)
-            const draftMocks = response.data.mocks.filter((mock)=> !mock.response.length)
+            const reviewMocks = response.data.mocks.filter((mock)=> mock.result.length)
+            const draftMocks = response.data.mocks.filter((mock)=> !mock.result.length)
             setReviewMocks(reviewMocks);
             setDraftMocks(draftMocks);   
             setIsLoading(false)
@@ -76,7 +76,7 @@ export default function Home()
                     {userData.mocks.map((mock)=>
                     (
                         <MockCard mock={mock}/>
-                    )).filter((mock)=> !mock.props.mock.response.length)}
+                    )).filter((mock)=> !mock.props.mock.result.length)}
                     </div>
                 </div>: <></>}
                 {reviewMocks?.length ?
@@ -86,7 +86,7 @@ export default function Home()
                     {userData.mocks.map((mock)=>
                     (
                         <MockCard mock={mock}/>
-                    )).filter((mock)=> mock.props.mock.response.length)}
+                    )).filter((mock)=> mock.props.mock.result.length)}
                     </div>
                 </div>: <></>}
             </div>}

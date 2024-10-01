@@ -4,19 +4,19 @@ const slice = createSlice({
     name: 'mock',
     initialState: 
     {
-        response: []
+        result: []
     },
     reducers:
     {
         updateResponse(state, action)
         {
             const { index, rating, feedback } = action.payload;
-            state.response[index] = {rating, feedback};
+            state.result[index] = {rating, feedback};
         },
 
         addResponse(state, action)
         {
-            state.response.push(action.payload)
+            state.result.push(action.payload)
         }
     }
 })

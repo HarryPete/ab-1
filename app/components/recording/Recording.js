@@ -24,7 +24,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
     const [ showWebcam, setShowWebam ] = useState(false);
     const [ answer, setAnswer ] = useState(null);
     const disptach = useDispatch();
-    const responses = useSelector((state)=> state.mockResponse.response);
+    const responses = useSelector((state)=> state.mockResponse.result);
     const [ isLoading, setIsLoading ] = useState(false);
     const {mockId} = useParams();
     const router = useRouter();
@@ -37,6 +37,8 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         })}
 
     },[results])
+
+    console.log(responses);
 
     async function runChat(prompt) 
     {
@@ -90,9 +92,9 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
     const endIndex = query.lastIndexOf("}") + 1; 
     const response = JSON.parse(query.slice(startIndex, endIndex));
     
-    if(activeIndex+1 < mockData.query.length)
+    if(activeIndex+1 < mockData.assessment.length)
     {
-        disptach(addResponse(response));
+        disptach(addResponse({response, answer}));
         setIsLoading(false)
         setActiveIndex((prev)=> prev+1)
         setResults([]);
@@ -101,11 +103,11 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
     else
     {
         setIsLoading(true)
-        const feedback = [...responses, response]
+        const feedback = [...responses, {response, answer}]
         try
         {
             const url = `/api/mock/${mockId}`
-            const response = await axios.put(url, {responses: feedback});
+            const response = await axios.put(url, {result: feedback});
             setIsLoading(false)
             toast.success(response.data.message);
             router.push(`/dashboard/review/${mockId}`)
@@ -129,7 +131,7 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
         try
         {      
             setIsLoading(true)      
-            prompt = `For the given interview question ${mockData.query[activeIndex].question} rate this answer ${answer} on scale of 10
+            prompt = `For the given interview question ${mockData.assessment[activeIndex].question} rate this answer ${answer} on scale of 10
             and feedback in 3-4 lines, return in JSON with fields rating and feedback`
             runChat(prompt);
         }
@@ -161,13 +163,13 @@ const Recording = ({setActiveIndex, activeIndex, mockData}) =>
                     {isRecording ? 'Stop Recording' : 'Start Recording'}
                 </button>
  
-                {answer && <button className={styles.webButton} onClick={handleSubmit}>{activeIndex+1 === mockData.query.length ? 'Finish' : 'Submit'}</button>}
+                {answer && <button className={styles.webButton} onClick={handleSubmit}>{activeIndex+1 === mockData.assessment.length ? 'Finish' : 'Submit'}</button>}
             </div>
 
             {isLoading && 
             <div className={styles.spinner}>
                 <CircularProgress sx={{color:"white"}}/>
-                <p className={styles.message}>{activeIndex+1 === mockData.query.length ? 'Generating Detailed Review' : 'Analyzing'}</p>
+                <p className={styles.message}>{activeIndex+1 === mockData.assessment.length ? 'Generating Detailed Review' : 'Analyzing'}</p>
             </div>}
 
             <ul className={styles.answer}>
