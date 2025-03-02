@@ -5,7 +5,7 @@ export const userRoutes =
 
 export const protectedRoutes =
 [
-    '/api/user', '/api/mock',  '/api/feedback'
+    '/api/user', '/api/mock', '/api/feedback'
 ] 
 
 export const authRoutes =

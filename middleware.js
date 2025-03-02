@@ -21,8 +21,11 @@ export default async function auth(req)
     } 
 
     const userRoute = userRoutes.some((route)=> nextUrl.pathname.startsWith(route));
-    // const adminRoute = protectedRoutes.some((route)=> nextUrl.pathname ===  route);
+    const adminRoute = protectedRoutes.some((route)=> nextUrl.pathname ===  route);
     const authRoute = authRoutes.some((route)=> nextUrl.pathname.startsWith(route));
+
+    if(adminRoute)
+        return NextResponse.redirect(new URL('/restricted', nextUrl))
 
     if(!user && userRoute)
         return NextResponse.redirect(new URL('/login', nextUrl))

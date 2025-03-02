@@ -7,9 +7,9 @@ const Footer = () =>
     return(
         <div className={styles.container}>
             {/* <p className={styles.title}><span className={styles.mock}>Mock</span> Hub</p> */}
-            <div className={styles.emailWrapper}>
+            {/* <div className={styles.emailWrapper}>
                 <p className={styles.email}>abhishekmagadum7@gmail.com</p>
-            </div>
+            </div> */}
         </div>
     )
 }
